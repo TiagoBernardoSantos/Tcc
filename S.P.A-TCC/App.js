@@ -6,20 +6,20 @@ import { Text, View, StyleSheet } from 'react-native'
 import Constants from 'expo-constants'
 
 
-import Contacts from './src/pages/Contacts/'
+/*import Contacts from './src/pages/Contacts/'
 import Information from './src/pages/Information/'
+*/
+ import Login from './components/login.js';
 
-/* import Cadastro from './components/cadastro.js';
- */
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
-        <Cadastro />   
+        <Login />   
     </View>
 
-    <NavigationContainer>
+    /*<NavigationContainer>
       <Stack.Navigator> 
         <Stack.Screen name="Contacts" component={Contacts}/>
 
@@ -27,7 +27,7 @@ export default function App() {
       </Stack.Navigator> 
 
       </Stack>
-    </NavigationContainer>
+    </NavigationContainer>*/
   );
 }
 
