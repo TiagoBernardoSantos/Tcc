@@ -6,28 +6,19 @@ import { Text, View, StyleSheet } from 'react-native'
 import Constants from 'expo-constants'
 
 
-/*import Contacts from './src/pages/Contacts/'
-import Information from './src/pages/Information/'
-*/
- import Login from './components/login.js';
+import Cadastro from './components/cadastro';
+import Login from './components/login';
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-        <Login />   
-    </View>
-
-    /*<NavigationContainer>
+    <NavigationContainer>
       <Stack.Navigator> 
-        <Stack.Screen name="Contacts" component={Contacts}/>
-
-        <Stack.Screen name="Information" component={Information}/>
+        <Stack.Screen name="Login" component={Login} options={{title: '', headerTransparent: true, headerLeft: null}}/>
+        <Stack.Screen name="Cadastro" component={Cadastro} options={{title: '', headerTransparent: true, headerLeft: null}} />
       </Stack.Navigator> 
-
-      </Stack>
-    </NavigationContainer>*/
+    </NavigationContainer>
   );
 }
 

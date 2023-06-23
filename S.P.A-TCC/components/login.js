@@ -1,7 +1,8 @@
+import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
-export default function App() {
+export default function Login({navigation}) {
   return (
     <View style={styles.container}>
       <Text style={styles.txtTitle}> Conecte-se </Text>
@@ -21,7 +22,7 @@ export default function App() {
         autoComplete="password"
       />
       <Pressable style={styles.formButton}>
-        <Text style={styles.txtButton}> Entrar </Text>
+        <Text style={styles.txtButton}  onPress={()=> navigation.navigate('Cadastro')}> Entrar </Text>
       </Pressable>
       <View style={styles.subContainer}>
         <Pressable style={styles.subButton}>
@@ -31,7 +32,7 @@ export default function App() {
 
       <View style={styles.subContainer}>
         <Pressable style={styles.subButton}>
-          <Text style={styles.subTxtButton}> Inscrever-se </Text>
+          <Text style={styles.subTxtButton} onPress={()=> navigation.navigate('Cadastro')}> Inscrever-se </Text>
         </Pressable>
       </View>
     </View>
