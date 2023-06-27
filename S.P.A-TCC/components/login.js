@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function Login({navigation}) {
   return (
@@ -21,9 +21,9 @@ export default function Login({navigation}) {
         placeholder='Digite sua senha...'
         autoComplete="password"
       />
-      <Pressable style={styles.formButton}>
-        <Text style={styles.txtButton}  onPress={()=> navigation.navigate('Cadastro')}> Entrar </Text>
-      </Pressable>
+      <TouchableOpacity style={styles.formButton}>
+        <Text style={styles.txtButton}  onPress={()=> navigation.navigate('Inicial')}> Entrar </Text>
+      </TouchableOpacity>
       <View style={styles.subContainer}>
         <Pressable style={styles.subButton}>
           <Text style={styles.subTxtButton}> Esqueceu sua senha? </Text>

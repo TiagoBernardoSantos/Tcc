@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function Cadastro({navigation}) {
   return (
@@ -30,9 +30,9 @@ export default function Cadastro({navigation}) {
         
       />
 
-      <Pressable style={styles.formButton}>
-        <Text style={styles.txtButton}> Entrar </Text>
-      </Pressable>
+      <TouchableOpacity style={styles.formButton}>
+        <Text style={styles.txtButton}  onPress={()=> navigation.navigate('Inicial')} > Entrar </Text>
+      </TouchableOpacity>
         <View style={styles.subContainer}>
         <Pressable style={styles.subButton}>
           <Text style={styles.subTxtButton} onPress={()=> navigation.navigate('Login')}> Já possui uma conta?</Text>
