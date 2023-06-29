@@ -5,8 +5,8 @@ import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from '
 export default function Instrucoes({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text style={styles.txtTitle}> Adicione lugares que você visita regularmente </Text>
-            <Text style={styles.txt}> Como trabalho, escola e casa </Text>
+            <Text style={styles.txtTitle}> Compartilhe sua localização com seus amigos e família através do código </Text>
+            <Text style={styles.txt}> Você pode compartilhar esse código através de e-mail, mensagem, pessoalmente ou até QR Code </Text>
             <StatusBar style="auto" />
             <TextInput style={styles.formInput}
         keyboardType='web-search'
@@ -21,7 +21,7 @@ export default function Instrucoes({ navigation }) {
             />
 
             <TouchableOpacity style={styles.formButton}>
-                <Text style={styles.txtButton} onPress={() => navigation.navigate('QRcode')}> Próximo </Text>
+                <Text style={styles.txtButton} onPress={() => navigation.navigate('Inicial')}> Próximo </Text>
             </TouchableOpacity>
 
             <View style={styles.subContainer}>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     txtTitle: {
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 'bold',
         marginTop: 60,
 
@@ -82,5 +82,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         margin: 25,
+        color: 'FEB74E',
     },
 });

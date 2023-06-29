@@ -10,6 +10,7 @@ import Login from "./components/login";
 import Inicial from "./components/inicial";
 import BV from "./components/telabv";
 import Instrucoes from "./components/instrucoes";
+import QRcode from "./components/QRcode";
 
 const Stack = createStackNavigator();
 
@@ -56,7 +57,11 @@ export default function App() {
           options={{ title: "", headerTransparent: true, headerLeft: null }}
         />
 
-
+        <Stack.Screen
+          name="QRcode"
+          component={QRcode}
+          options={{ title: "", headerTransparent: true, headerLeft: null }}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>
