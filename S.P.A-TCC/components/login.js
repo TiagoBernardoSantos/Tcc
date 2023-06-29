@@ -6,7 +6,7 @@ export default function Login({navigation}) {
   return (
     <View style={styles.container}>
       <Text style={styles.txtTitle}> Conecte-se </Text>
-      <StatusBar style="auto" />
+      <StatusBar style="auto"/>
       <Text style={{fontSize: 17}}>E-mail:</Text>
       <TextInput style={styles.formInput}
         keyboardType="email-address"
@@ -22,7 +22,7 @@ export default function Login({navigation}) {
         autoComplete="password"
       />
       <TouchableOpacity style={styles.formButton}>
-        <Text style={styles.txtButton}  onPress={()=> navigation.navigate('Inicial')}> Entrar </Text>
+        <Text style={styles.txtButton}  onPress={()=> navigation.navigate('Bem Vindo')}> Entrar </Text>
       </TouchableOpacity>
       <View style={styles.subContainer}>
         <Pressable style={styles.subButton}>

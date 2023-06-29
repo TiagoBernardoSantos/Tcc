@@ -8,6 +8,8 @@ import Constants from "expo-constants";
 import Cadastro from "./components/cadastro";
 import Login from "./components/login";
 import Inicial from "./components/inicial";
+import BV from "./components/telabv";
+import Instrucoes from "./components/instrucoes";
 
 const Stack = createStackNavigator();
 
@@ -41,6 +43,21 @@ export default function App() {
             headerTitleStyle: { backgroundColor: "#114D9D", fontSize: 30 },
           }}
         />
+
+        <Stack.Screen
+          name="Bem Vindo"
+          component={BV}
+          options={{ title: "", headerTransparent: true, headerLeft: null }}
+        />
+
+        <Stack.Screen
+          name="Instruções"
+          component={Instrucoes}
+          options={{ title: "", headerTransparent: true, headerLeft: null }}
+        />
+
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );
