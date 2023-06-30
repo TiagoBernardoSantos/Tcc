@@ -53,10 +53,10 @@ https://developerplus.com.br/como-copiar-para-area-de-transferencia-no-react-nat
         pessoalmente ou até QR Code{" "}
       </Text>
 
-      <TouchableOpacity style={styles.formButton}>
+      <TouchableOpacity style={styles.formButton} >
         <Text
           style={styles.txtButton}
-          onPress={() => navigation.navigate("Inicial")}
+          onPress={() => navigation.navigate('Home')}
         >
           {" "}
           Próximo{" "}
