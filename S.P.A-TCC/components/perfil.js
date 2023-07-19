@@ -13,7 +13,7 @@ import {
 const image = { require: ('./assets/map.png') };
 /* https://reactnative.dev/docs/imagebackground */
 
-export default function Inicial({ navigation }) {
+export default function Perfil({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground

@@ -4,7 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Cadastro from "../components/cadastro";
 import Login from "../components/login";
-import Inicial from "../components/inicial";
 import BV from "../components/telabv";
 import Instrucoes from "../components/instrucoes";
 import QRcode from "../components/QRcode";

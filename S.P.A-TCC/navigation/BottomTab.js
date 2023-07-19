@@ -1,24 +1,57 @@
 import React from "react";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Inicial from "../components/inicial";
-import QRcode from "../components/QRcode";
+import Perfil from "../components/perfil";
+import Serviços from "../components/servicos";
+import Contatos from "../components/contatos";
+
 
 const Tab = createBottomTabNavigator();
 
 function BottomTab(){
     return (
-        <Tab.Navigator screenOptions={{headerShown: false, tabBarInactiveBackgroundColor: 'red', tabBarActiveBackgroundColor: 'pink'}}>
+        <Tab.Navigator screenOptions={{headerShown: false,  tabBarActiveTintColor: '#FEB74E',}}>
             <Tab.Screen
-                name="QrCode"
-                component={QRcode}
-            />
-            <Tab.Screen
-                name="Inicio"
+                name="Inicial"
                 component={Inicial}
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="home" color={color} size={26} />
+                      ),
+                } }
             />
+            <Tab.Screen
+                name="Contatos"
+                component={Contatos}
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="contacts" color={color} size={26} />
+                      ),
+                } }
+                
+            />
+            <Tab.Screen
+                name="Serviços"
+                component={Serviços}
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="menu" color={color} size={26} />
+                      ),
+                } }
+            />
+            <Tab.Screen
+                name="Perfil"
+                component={Perfil}
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons name="account" color={color} size={26} />
+                      ),
+                } }
+            />
+
         </Tab.Navigator>
     )
 }
