@@ -1,20 +1,25 @@
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text, TextInput, TouchableOpacity, View
+} from 'react-native';
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.txtTitle}> Conecte-se </Text>
-      <StatusBar style="auto"/>
-      <Text style={{fontSize: 17}}>E-mail:</Text>
+      <StatusBar style="auto" />
+      
+      <Text style={{ fontSize: 17 }}>E-mail:</Text>
       <TextInput style={styles.formInput}
         keyboardType="email-address"
         autoCapitalize="none"
         autoComplete="email"
         placeholder='Digite seu e-mail...'
       />
-      <Text style={{fontSize: 17}}>Senha:</Text>
+      <Text style={{ fontSize: 17 }}>Senha:</Text>
       <TextInput style={styles.formInput}
         secureTextEntry
         autoCapitalize="none"
@@ -22,7 +27,7 @@ export default function Login({navigation}) {
         autoComplete="password"
       />
       <TouchableOpacity style={styles.formButton}>
-        <Text style={styles.txtButton}  onPress={()=> navigation.navigate('Bem Vindo')}> Entrar </Text>
+        <Text style={styles.txtButton} onPress={() => navigation.navigate('Bem Vindo')}> Entrar </Text>
       </TouchableOpacity>
       <View style={styles.subContainer}>
         <Pressable style={styles.subButton}>
@@ -32,7 +37,7 @@ export default function Login({navigation}) {
 
       <View style={styles.subContainer}>
         <Pressable style={styles.subButton}>
-          <Text style={styles.subTxtButton} onPress={()=> navigation.navigate('Cadastro')}> Inscrever-se </Text>
+          <Text style={styles.subTxtButton} onPress={() => navigation.navigate('Cadastro')}> Inscrever-se </Text>
         </Pressable>
       </View>
     </View>
@@ -40,7 +45,7 @@ export default function Login({navigation}) {
 }
 
 const styles = StyleSheet.create({
- 
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -88,5 +93,5 @@ const styles = StyleSheet.create({
     fontSize: 17,
     alignItems: 'center',
   },
- 
+
 });

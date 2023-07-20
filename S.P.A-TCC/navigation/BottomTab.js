@@ -11,45 +11,58 @@ import Contatos from "../components/contatos";
 
 const Tab = createBottomTabNavigator();
 
-function BottomTab(){
+function BottomTab() {
     return (
-        <Tab.Navigator screenOptions={{headerShown: false,  tabBarActiveTintColor: '#FEB74E',}}>
+        <Tab.Navigator 
+        screenOptions={{ headerShown: false,
+         tabBarActiveTintColor: '#FEB74E', }}>
             <Tab.Screen
                 name="Inicial"
                 component={Inicial}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="home" color={color} size={26} />
-                      ),
-                } }
+                        <MaterialCommunityIcons name="home"
+                            color={color}
+                            size={26} />
+                    ),
+                }}
             />
             <Tab.Screen
                 name="Contatos"
                 component={Contatos}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="contacts" color={color} size={26} />
-                      ),
-                } }
-                
+                        <MaterialCommunityIcons
+                            name="contacts"
+                            color={color}
+                            size={26} />
+                    ),
+                }}
+
             />
             <Tab.Screen
                 name="Serviços"
                 component={Serviços}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="menu" color={color} size={26} />
-                      ),
-                } }
+                        <MaterialCommunityIcons
+                            name="menu"
+                            color={color}
+                            size={26} />
+                    ),
+                }}
             />
             <Tab.Screen
                 name="Perfil"
                 component={Perfil}
                 options={{
                     tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={26} />
-                      ),
-                } }
+                        <MaterialCommunityIcons
+                            name="account"
+                            color={color}
+                            size={26} />
+                    ),
+                }}
             />
 
         </Tab.Navigator>
