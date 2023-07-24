@@ -1,59 +1,90 @@
 import { Image } from 'expo-image';
 import { StatusBar } from 'expo-status-bar';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Pressable, StyleSheet, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default function Serviços({ navigation }) {
     return (
-        <View style={styles.container}>
-            <View style={styles.subContainer}>
+        <ScrollView>
+            <View style={styles.container}>
 
-             <Image
-                style={styles.image}
-                source={require('../assets/policia.png')}
-            />
+                    <View style={styles.subContainer}>
+                <View style={styles.containerPolice}>
 
-            <TouchableOpacity style={styles.formButton}>
-                <Text style={styles.txtButton} onPress={() => navigation.navigate('Instruções')}> Ligar </Text>
-                <MaterialCommunityIcons
-                name="telephone"
-                size={20} />
-            </TouchableOpacity> 
+
+                        <Image
+                            style={styles.image}
+                            source={require('../assets/policia.png')}
+                        />
+
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.txtButton}
+                                onPress={() => navigation.navigate('Instruções')}>
+                                Ligar
+                            </Text>
+                            <MaterialCommunityIcons
+                                name="phone"
+                                size={20} />
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.containerAmbulancia}>
+                        <Image
+                            style={styles.image1}
+                            source={require('../assets/ambulancia.jpg')}
+                        />
+
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.txtButton}
+                                onPress={() => navigation.navigate('Instruções')}>
+                                Ligar
+                            </Text>
+                            <MaterialCommunityIcons
+                                name="phone"
+                                size={20} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                <View style={styles.subContainer}>
+
+                    <View style={styles.containerCVV}>
+                        <Image
+                            style={styles.image}
+                            source={require('../assets/cvv.png')}
+                        />
+
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.txtButton}
+                                onPress={() => navigation.navigate('Instruções')}>
+                                Ligar
+                            </Text>
+                            <MaterialCommunityIcons
+                                name="phone"
+                                size={20} />
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.containerBombeiros}>
+
+                        <Image
+                            style={styles.image1}
+                            source={require('../assets/bombeiro.png')}
+                        />
+
+                        <TouchableOpacity style={styles.button}>
+                            <Text style={styles.txtButton}
+                                onPress={() => navigation.navigate('Instruções')}>
+                                Ligar
+                            </Text>
+                            <MaterialCommunityIcons
+                                name="phone"
+                                size={20} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
-            
-            <View style={styles.subContainer}>
-             <Image
-                style={styles.image}
-                source={require('../assets/ambulancia.png')}
-            />
-
-            <TouchableOpacity style={styles.formButton}>
-                <Text style={styles.txtButton} onPress={() => navigation.navigate('Instruções')}> Ligar </Text>
-            </TouchableOpacity> 
-            </View>
-
-            <View style={styles.subContainer}>
-             <Image
-                style={styles.image}
-                source={require('../assets/cvv.png')}
-            />
-
-            <TouchableOpacity style={styles.formButton}>
-                <Text style={styles.txtButton} onPress={() => navigation.navigate('Instruções')}> Ligar </Text>
-            </TouchableOpacity> 
-            </View>
-
-            <View style={styles.subContainer}>
-             <Image
-                style={styles.image}
-                source={require('../assets/bombeiro.png')}
-            />
-
-            <TouchableOpacity style={styles.formButton}>
-                <Text style={styles.txtButton} onPress={() => navigation.navigate('Instruções')}> Ligar </Text>
-            </TouchableOpacity> 
-            </View>
-        </View>
+        </ScrollView>
     );
 }
 
@@ -61,19 +92,39 @@ export default function Serviços({ navigation }) {
 
 
 const styles = StyleSheet.create({
+    container: {
+        /* flexDirection: 'row', */
+        flexFlow: 'row wrap',
+        display: 'flex',
+        backgroundColor: '#fff',
+
+    },
     image: {
         margin: 15,
-        flex: 1,
-        width: '70%',
+        flex: 5,
+        width: 155,
+        height: 120
     },
-
-    container: {
+    image1: {
+        margin: 15,
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        width: 155,
+        height: 150
     },
-
+    containerPolice: {
+        left: 0
+    },
+    containerAmbulancia: {
+        bottom: 290,
+        left: 165 
+    },
+    containerCVV: {
+        left: 0,
+    },
+    containerBombeiros: {
+        left: '100%',   
+    },
+  
     txtTitle: {
         fontSize: 36,
         fontWeight: 'bold',
@@ -82,12 +133,13 @@ const styles = StyleSheet.create({
 
     },
 
-    formButton: {
+    button: {
         backgroundColor: '#FEB74E',
-        width: '50%',
+        maxWidth: 75,
+        maxHeight: 65,
         margin: 30,
         padding: 10,
-        borderRadius: 70,
+        borderRadius: 6,
         alignItems: 'center',
     },
 
@@ -98,9 +150,9 @@ const styles = StyleSheet.create({
     },
 
     subContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '80%',
+        /*flexDirection: 'column',   */
+        width: '50%',
+        marginTop: 50,
     },
 
     subButton: {

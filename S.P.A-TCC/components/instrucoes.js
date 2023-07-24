@@ -26,7 +26,8 @@ export default function Instrucoes({ navigation }) {
 
             <View style={styles.subContainer}>
         <Pressable style={styles.subButton}>
-          <Text style={styles.subTxtButton} onPress={()=> navigation.navigate('Inicial')}> Agora não </Text>
+          <Text style={styles.subTxtButton} 
+          onPress={()=> navigation.navigate('Inicial')}> Agora não </Text>
         </Pressable>
       </View>
         </View>
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: 'bold',
         marginTop: 60,
+        textAlign: 'center'
 
     },
     formButton: {
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
         color: '#FEB74E',
         marginLeft: 50,
         fontSize: 17,
-        alignItems: 'center',
+        textAlign: 'center',
     },
     txt: {
         fontSize: 15,

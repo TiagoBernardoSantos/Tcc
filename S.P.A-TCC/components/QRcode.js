@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Image } from "expo-image";
 import Clipboard from "@react-native-community/clipboard";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StatusBar } from "expo-status-bar";
 import {
   Pressable,
@@ -8,14 +9,15 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  ScrollView,
   View,
 } from "react-native";
 
 export default function QRcode({ navigation }) {
-    /*typedText: variável que será usada para armazenar o texto digitado pelo usuário.*/
-    /*copiedText: variável que será usada para armazenar o texto recuperado da área de transferência.
+  /*typedText: variável que será usada para armazenar o texto digitado pelo usuário.*/
+  /*copiedText: variável que será usada para armazenar o texto recuperado da área de transferência.
 https://developerplus.com.br/como-copiar-para-area-de-transferencia-no-react-nativeclipboard/
- */
+*/
 
   const [typedText, setTypedText] = useState("");
   const [copiedText, setCopiedText] = useState("");
@@ -24,13 +26,14 @@ https://developerplus.com.br/como-copiar-para-area-de-transferencia-no-react-nat
     Clipboard.setString(typedText);
     alert("Texto Copiado!");
   };
-  const fetchCopiedText  = async () => {
+  const fetchCopiedText = async () => {
     const text = await Clipboard.getString();
     setCopiedText(text);
   }
 
 
   return (
+    
     <View style={styles.container}>
       <Text style={styles.txtTitle}>
         {" "}
@@ -43,7 +46,10 @@ https://developerplus.com.br/como-copiar-para-area-de-transferencia-no-react-nat
 
       <TouchableOpacity style={styles.formButton1}>
         <Text style={styles.txtButton1} onPress={() => copyToClipboard()}>
-          CCC-6565
+          <MaterialCommunityIcons
+            name="content-copy"
+            size={20} />
+            CCC-6565
         </Text>
       </TouchableOpacity>
 
@@ -85,8 +91,9 @@ const styles = StyleSheet.create({
   },
   txtTitle: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     marginTop: 60,
+    textAlign: 'center',
   },
   formButton: {
     backgroundColor: "#114D9D",
@@ -139,6 +146,7 @@ const styles = StyleSheet.create({
   txt: {
     fontSize: 16,
     fontWeight: "bold",
+    textAlign: 'center',
     margin: 25,
     color: "#FEB74E",
   },
