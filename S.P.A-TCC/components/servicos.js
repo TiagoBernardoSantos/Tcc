@@ -5,86 +5,86 @@ import { Pressable, StyleSheet, ScrollView, Text, TextInput, TouchableOpacity, V
 
 export default function Serviços({ navigation }) {
     return (
-        <ScrollView>
             <View style={styles.container}>
 
-                    <View style={styles.subContainer}>
+            <View style={styles.subContainer}>
                 <View style={styles.containerPolice}>
+                    <MaterialCommunityIcons
+                        name="police-station"
+                        size={150}
+                        color={"black"} />
+                        <Text style={styles.txt}>Policia</Text>
 
 
-                        <Image
-                            style={styles.image}
-                            source={require('../assets/policia.png')}
-                        />
-
-                        <TouchableOpacity style={styles.button}>
-                            <Text style={styles.txtButton}
-                                onPress={() => navigation.navigate('Instruções')}>
-                                Ligar
-                            </Text>
-                            <MaterialCommunityIcons
-                                name="phone"
-                                size={20} />
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.containerAmbulancia}>
-                        <Image
-                            style={styles.image1}
-                            source={require('../assets/ambulancia.jpg')}
-                        />
-
-                        <TouchableOpacity style={styles.button}>
-                            <Text style={styles.txtButton}
-                                onPress={() => navigation.navigate('Instruções')}>
-                                Ligar
-                            </Text>
-                            <MaterialCommunityIcons
-                                name="phone"
-                                size={20} />
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.txtButton}
+                            onPress={() => navigation.navigate('Instruções')}>
+                            Ligar
+                        </Text>
+                       
+                    </TouchableOpacity>
+                </View>
                 </View>
 
                 <View style={styles.subContainer}>
 
-                    <View style={styles.containerCVV}>
-                        <Image
-                            style={styles.image}
-                            source={require('../assets/cvv.png')}
+                <View style={styles.containerAmbulancia}>
+                    <MaterialCommunityIcons
+                        name="ambulance"
+                        size={150}
+                        color={"#0000CD"}
                         />
+                        <Text style={styles.txt}>Ambulância</Text>
 
-                        <TouchableOpacity style={styles.button}>
-                            <Text style={styles.txtButton}
-                                onPress={() => navigation.navigate('Instruções')}>
-                                Ligar
-                            </Text>
-                            <MaterialCommunityIcons
-                                name="phone"
-                                size={20} />
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styles.containerBombeiros}>
-
-                        <Image
-                            style={styles.image1}
-                            source={require('../assets/bombeiro.png')}
-                        />
-
-                        <TouchableOpacity style={styles.button}>
-                            <Text style={styles.txtButton}
-                                onPress={() => navigation.navigate('Instruções')}>
-                                Ligar
-                            </Text>
-                            <MaterialCommunityIcons
-                                name="phone"
-                                size={20} />
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.txtButton}
+                            onPress={() => navigation.navigate('Instruções')}>
+                            Ligar
+                        </Text>
+                        
+                    </TouchableOpacity>
                 </View>
             </View>
-        </ScrollView>
+
+            <View style={styles.subContainer}>
+
+                <View style={styles.containerCVV}>
+                    <MaterialCommunityIcons
+
+                        name="head-heart-outline"
+                        size={150}
+                        color={"#FFD700"} />
+                        <Text style={styles.txt}>CVV</Text>
+
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.txtButton}
+                            onPress={() => navigation.navigate('Instruções')}>
+                            Ligar
+                        </Text>
+                        </TouchableOpacity>
+                </View>
+            </View>
+
+            <View style={styles.subContainer}>
+                <View style={styles.containerBombeiros}>
+
+                    <MaterialCommunityIcons
+
+                        name="fire-alert"
+                        size={150}
+                        color={"red"} />
+                <Text style={styles.txt}>Bombeiros</Text>
+
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.txtButton}
+                            onPress={() => navigation.navigate('Instruções')}>
+                            Ligar
+                        </Text>
+                     
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </View>
     );
 }
 
@@ -97,34 +97,26 @@ const styles = StyleSheet.create({
         flexFlow: 'row wrap',
         display: 'flex',
         backgroundColor: '#fff',
-
-    },
-    image: {
-        margin: 15,
-        flex: 5,
-        width: 155,
-        height: 120
-    },
-    image1: {
-        margin: 15,
-        flex: 1,
-        width: 155,
-        height: 150
+        
     },
     containerPolice: {
-        left: 0
+        left: 0,
+        bottom: '10%'
     },
     containerAmbulancia: {
-        bottom: 290,
-        left: 165 
+        bottom: '122%',
+        left: '100%'
     },
     containerCVV: {
         left: 0,
+        top: -500
+
     },
     containerBombeiros: {
-        left: '100%',   
-    },
-  
+        left: '100%',
+        top: -900
+    }, 
+
     txtTitle: {
         fontSize: 36,
         fontWeight: 'bold',
@@ -135,9 +127,9 @@ const styles = StyleSheet.create({
 
     button: {
         backgroundColor: '#FEB74E',
-        maxWidth: 75,
+        maxWidth: 85,
         maxHeight: 65,
-        margin: 30,
+        margin: 40,
         padding: 10,
         borderRadius: 6,
         alignItems: 'center',
@@ -153,6 +145,8 @@ const styles = StyleSheet.create({
         /*flexDirection: 'column',   */
         width: '50%',
         marginTop: 50,
+        alignItems: 'center',
+        right: 0,
     },
 
     subButton: {
@@ -169,6 +163,7 @@ const styles = StyleSheet.create({
     txt: {
         fontSize: 15,
         fontWeight: 'bold',
-        margin: 25,
+        margin: 15,
+        textAlign: 'center'
     },
 });
