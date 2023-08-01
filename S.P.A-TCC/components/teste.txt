@@ -1,153 +1,162 @@
-import { Image } from 'expo-image';
-import { StatusBar } from 'expo-status-bar';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Pressable, StyleSheet,ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import {
+  Pressable,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function Serviços({ navigation }) {
-    return (
-        <ScrollView>
-        <View style={styles.container}>
-            <View style={styles.subContainer}>
+  return (
+    <View style={styles.container}>
+      <View style={styles.subContainer}>
+        <View style={styles.containerPolice}>
+          <MaterialCommunityIcons
+            name="police-station"
+            size={150}
+            color={"black"}
+          />
+          <Text style={styles.txt}>Policia</Text>
 
-                <Image
-                    style={styles.image}
-                    source={require('../assets/policia.png')}
-                />
-
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.txtButton} 
-                    onPress={() => navigation.navigate('Instruções')}> 
-                    Ligar 
-                    </Text>
-                    <MaterialCommunityIcons
-                        name="phone"
-                        size={20} />
-                </TouchableOpacity>
-            </View>
-
-            <View style={styles.subContainer}>
-                <Image
-                    style={styles.image1}
-                    source={require('../assets/ambulancia.jpg')}
-                />
-
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.txtButton} 
-                    onPress={() => navigation.navigate('Instruções')}> 
-                    Ligar 
-                    </Text>
-                    <MaterialCommunityIcons
-                        name="phone"
-                        size={20} />
-                </TouchableOpacity>
-            </View>
-
-            <View style={styles.subContainer}>
-                <Image
-                    style={styles.image}
-                    source={require('../assets/cvv.png')}
-                />
-
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.txtButton} 
-                    onPress={() => navigation.navigate('Instruções')}> 
-                    Ligar 
-                    </Text>
-                    <MaterialCommunityIcons
-                        name="phone"
-                        size={20} />
-                </TouchableOpacity>
-            </View>
-
-            <View style={styles.subContainer}>
-                <Image
-                    style={styles.image1}
-                    source={require('../assets/bombeiro.png')}
-                />
-
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.txtButton} 
-                    onPress={() => navigation.navigate('Instruções')}>
-                         Ligar 
-                         </Text>
-                    <MaterialCommunityIcons
-                        name="phone"
-                        size={20} />
-                </TouchableOpacity>
-            </View>
+          <TouchableOpacity style={styles.button}>
+            <Text
+              style={styles.txtButton}
+              onPress={() => navigation.navigate("Instruções")}
+            >
+              Ligar
+            </Text>
+          </TouchableOpacity>
         </View>
-        </ScrollView>
-    );
+
+        <View style={styles.containerAmbulancia}>
+          <MaterialCommunityIcons
+            name="ambulance"
+            size={150}
+            color={"#0000CD"}
+          />
+          <Text style={styles.txt}>Ambulância</Text>
+
+          <TouchableOpacity style={styles.button}>
+            <Text
+              style={styles.txtButton}
+              onPress={() => navigation.navigate("Instruções")}
+            >
+              Ligar
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View style={styles.subContainer}>
+        <View style={styles.containerCVV}>
+          <MaterialCommunityIcons
+            name="head-heart-outline"
+            size={150}
+            color={"#FFD700"}
+          />
+          <Text style={styles.txt}>CVV</Text>
+
+          <TouchableOpacity style={styles.button}>
+            <Text
+              style={styles.txtButton}
+              onPress={() => navigation.navigate("Instruções")}
+            >
+              Ligar
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.containerBombeiros}>
+          <MaterialCommunityIcons name="fire-alert" size={150} color={"red"} />
+          <Text style={styles.txt}>Bombeiros</Text>
+
+          <TouchableOpacity style={styles.button}>
+            <Text
+              style={styles.txtButton}
+              onPress={() => navigation.navigate("Instruções")}
+            >
+              Ligar
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </View>
+  );
 }
 
-
-
-
 const styles = StyleSheet.create({
-    image: {
-        margin: 15,
-        flex: 5,
-        width: 55,
-        height: 120
-    },
-    image1: {
-        margin: 15,
-        flex: 1,
-        width: 55,
-        height: 150
-    },
+  container: {
+    /* flexDirection: 'row', */
+    flex: 1,
+    width: "100%",
+    backgroundColor: "#fff",
+    alignItems: "center" /* horizontal */,
+    justifyContent: "center" /* vertical */,
+  },
+  subContainer: {
+    /*flexDirection: 'column',   */
+    width: "50%" /* horinzontal */,
+    height: "100%" /* vertical */,
+  },
+  containerPolice: {
+    width: "50%" /* horinzontal */,
+    height: "100%",
+  },
+  containerAmbulancia: {
+    width: "50%" /* horinzontal */,
+    height: "100%",
+  },
+  containerCVV: {
+    width: "50%" /* horinzontal */,
+    height: "100%",
+  },
+  containerBombeiros: {
+    width: "50%" /* horinzontal */,
+    height: "100%",
+  },
 
+  txtTitle: {
+    fontSize: 36,
+    fontWeight: "bold",
+    marginTop: 60,
+    color: "#FEB74E",
+  },
 
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+  button: {
+    backgroundColor: "#FEB74E",
+    maxWidth: 85,
+    maxHeight: 65,
+    margin: 40,
+    padding: 10,
+    borderRadius: 6,
+    alignItems: "center",
+  },
 
-    txtTitle: {
-        fontSize: 36,
-        fontWeight: 'bold',
-        marginTop: 60,
-        color: '#FEB74E',
+  txtButton: {
+    color: "#fff",
+    fontSize: 22,
+    fontWeight: "bold",
+  },
 
-    },
+  subButton: {
+    padding: 10,
+  },
 
-    button: {
-        backgroundColor: '#FEB74E',
-        maxWidth: '75%',
-        maxHeight: 65,
-        margin: 30,
-        padding: 10,
-        borderRadius:6,
-        alignItems: 'center',
-    },
+  subTxtButton: {
+    color: "#FEB74E",
+    marginLeft: 50,
+    fontSize: 17,
+    alignItems: "center",
+  },
 
-    txtButton: {
-        color: '#fff',
-        fontSize: 22,
-        fontWeight: 'bold',
-    },
-
-    subContainer: {
-        flexDirection: 'row',
-        width: '90%',
-    },
-
-    subButton: {
-        padding: 10,
-    },
-
-    subTxtButton: {
-        color: '#FEB74E',
-        marginLeft: 50,
-        fontSize: 17,
-        alignItems: 'center',
-    },
-
-    txt: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        margin: 25,
-    },
+  txt: {
+    fontSize: 15,
+    fontWeight: "bold",
+    margin: 15,
+    textAlign: "center",
+  },
 });

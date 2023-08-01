@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     subContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '80%',
+        width: '50%',
     },
     subButton: {
         padding: 10,

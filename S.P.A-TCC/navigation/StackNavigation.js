@@ -31,13 +31,13 @@ const StackNavigator = () => {
           name="Home"
           component={BottomTab}
           options={{
-            title: "Home",
+            title: "",
             headerTransparent: false,
             headerLeft: null,
             headerTintColor: "#fff",
             headerFontSize: "300px",
             headerTitleAlign: "center",
-            headerStyle: { backgroundColor: "#114D9D", height: 90 },
+            headerStyle: { backgroundColor: "#114D9D", height: 0 },
             headerTitleStyle: { backgroundColor: "#114D9D", fontSize: 30 },
           }}
         />
