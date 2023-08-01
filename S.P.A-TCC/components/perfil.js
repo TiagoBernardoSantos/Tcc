@@ -18,9 +18,7 @@ import {
 export default function Perfil({ navigation }) {
   return (
     <ScrollView>
-      <SafeAreaView style={styles.container}>
-
-
+      <View style={styles.container}>
 
         <View style={styles.subContainer}>
           <MaterialCommunityIcons
@@ -82,7 +80,7 @@ export default function Perfil({ navigation }) {
               />  Apagar Perfil </Text>
           </Pressable>
         </View>
-      </SafeAreaView>
+      </View>
     </ScrollView>
 
   );
@@ -91,8 +89,14 @@ export default function Perfil({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
-
+    width: '100%',
+  },
+  subContainer: {
+    backgroundColor: '#114D9D',
+    height: '23%',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   formInput: {
     borderColor: 'black',
@@ -114,11 +118,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  subContainer: {
-    backgroundColor: '#114D9D',
-    height: '23%',
-    width: '100%',
-  },
+
   font: {
     color: 'white',
     fontSize: 30,

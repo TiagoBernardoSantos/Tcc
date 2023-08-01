@@ -6,6 +6,7 @@ import {
   ScrollView,
   Text,
   TextInput,
+  Image,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -14,6 +15,8 @@ export default function Serviços({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
+
+        {/* policia */}
         <View style={styles.containerPolice}>
           <MaterialCommunityIcons
             name="police-station"
@@ -32,14 +35,18 @@ export default function Serviços({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.containerPolice}>
-          <MaterialCommunityIcons
-            name="police-station"
+
+        {/* ambulancia */}
+        <View style={styles.containerAmbulancia}>
+       <MaterialCommunityIcons
+            name="ambulance"
             size={150}
-            color={"black"}
+            color={"#0000CD"}
             style = {styles.icon}
+
           />
-          <Text style={styles.txt}>Policia</Text>
+          <Text style={styles.txt}>Ambulância</Text>
+
 
           <TouchableOpacity style={styles.button}>
             <Text
@@ -52,15 +59,17 @@ export default function Serviços({ navigation }) {
         </View>
 
       </View>
+      {/* cvv */}
       <View style={styles.subContainer}>
-        <View style={styles.containerPolice}>
+      <View style={styles.containerCVV}>
           <MaterialCommunityIcons
-            name="police-station"
+            name="head-heart-outline"
             size={150}
-            color={"black"}
+            color={"#FFD700"}
             style = {styles.icon}
+
           />
-          <Text style={styles.txt}>Policia</Text>
+          <Text style={styles.txt}>CVV</Text>
 
           <TouchableOpacity style={styles.button}>
             <Text
@@ -71,14 +80,16 @@ export default function Serviços({ navigation }) {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.containerPolice}>
-          <MaterialCommunityIcons
-            name="police-station"
-            size={150}
-            color={"black"}
-            style = {styles.icon}
+
+
+        <View style={styles.containerBombeiros}>
+          <MaterialCommunityIcons 
+          name="fire-alert" 
+          size={150} 
+          color={"red"} 
+          style = {styles.icon}
           />
-          <Text style={styles.txt}>Policia</Text>
+          <Text style={styles.txt}>Bombeiros</Text>
 
           <TouchableOpacity style={styles.button}>
             <Text
@@ -103,14 +114,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center" /* horizontal */,
     justifyContent: "flex-start" /* vertical */,
-    backgroundColor: 'blue',
   },
+
   subContainer: {
     /*flexDirection: 'column',   */
     width: "100%" /* horinzontal */,
     height: "50%" /* vertical */,
-    backgroundColor: 'red',
     flexDirection: 'row',
+    gap: 6,
+
   },
 
   icon: {
@@ -120,21 +132,25 @@ const styles = StyleSheet.create({
   containerPolice: {
     width: "50%" /* horinzontal */,
     height: "100%",
-    backgroundColor: 'green',
     alignItems: 'center',
-    gap: 10,
+    top: 60,
   },
   containerAmbulancia: {
     width: "50%" /* horinzontal */,
     height: "100%",
+    alignItems: 'center',
+    top: 60,
   },
   containerCVV: {
     width: "50%" /* horinzontal */,
     height: "100%",
+    alignItems: 'center',
   },
   containerBombeiros: {
     width: "50%" /* horinzontal */,
     height: "100%",
+    alignItems: 'center',
+
   },
 
   txtTitle: {
@@ -146,7 +162,8 @@ const styles = StyleSheet.create({
 
   button: {
     backgroundColor: "#FEB74E",
-    width: '90%',
+    width: '80%',
+    borderRadius: 6,
     alignItems: 'center',
   },
 
