@@ -18,12 +18,10 @@ export default function Serviços({ navigation }) {
 
         {/* policia */}
         <View style={styles.containerPolice}>
-          <MaterialCommunityIcons
-            name="police-station"
-            size={150}
-            color={"black"}
-            style = {styles.icon}
-          />
+        <Image
+                style={styles.image}
+                source={require('../assets/policia.png')}
+            />
           <Text style={styles.txt}>Policia</Text>
 
           <TouchableOpacity style={styles.button}>
@@ -38,13 +36,10 @@ export default function Serviços({ navigation }) {
 
         {/* ambulancia */}
         <View style={styles.containerAmbulancia}>
-       <MaterialCommunityIcons
-            name="ambulance"
-            size={150}
-            color={"#0000CD"}
-            style = {styles.icon}
-
-          />
+        <Image
+                style={styles.image}
+                source={require('../assets/ambulancia.png')}
+            />
           <Text style={styles.txt}>Ambulância</Text>
 
 
@@ -62,13 +57,10 @@ export default function Serviços({ navigation }) {
       {/* cvv */}
       <View style={styles.subContainer}>
       <View style={styles.containerCVV}>
-          <MaterialCommunityIcons
-            name="head-heart-outline"
-            size={150}
-            color={"#FFD700"}
-            style = {styles.icon}
-
-          />
+      <Image
+                style={styles.imagec}
+                source={require('../assets/cvv.png')}
+            />
           <Text style={styles.txt}>CVV</Text>
 
           <TouchableOpacity style={styles.button}>
@@ -83,12 +75,10 @@ export default function Serviços({ navigation }) {
 
 
         <View style={styles.containerBombeiros}>
-          <MaterialCommunityIcons 
-          name="fire-alert" 
-          size={150} 
-          color={"red"} 
-          style = {styles.icon}
-          />
+        <Image
+                style={styles.imageb}
+                source={require('../assets/bombeiro.png')}
+            />
           <Text style={styles.txt}>Bombeiros</Text>
 
           <TouchableOpacity style={styles.button}>
@@ -189,5 +179,20 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     margin: 15,
     textAlign: "center",
+  },
+  image: {
+    width: "70%",
+    height: "40%",
+    margin: 10,
+  },
+  imageb: {
+    width: "65%",
+    height: "40%",
+    margin: 10,
+  },
+  imagec: {
+    width: "80%",
+    height: "40%",
+    margin: 10,
   },
 });

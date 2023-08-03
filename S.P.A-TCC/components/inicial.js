@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 
-const image = { require: ('./assets/map.png') };
+const image = { require: ('../assets/map.png') };
 /* https://reactnative.dev/docs/imagebackground */
 
 export default function Inicial({ navigation }) {
