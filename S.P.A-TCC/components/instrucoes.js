@@ -20,12 +20,13 @@ export default function Instrucoes({ navigation }) {
                 source={require('../assets/instru.png')}
             />
 
-            <TouchableOpacity style={styles.formButton}>
-                <Text style={styles.txtButton} onPress={() => navigation.navigate('QRcode')}> Próximo </Text>
+            <TouchableOpacity style={styles.formButton}
+            onPress={() => navigation.navigate('QRcode')}>
+                <Text style={styles.txtButton} > Próximo </Text>
             </TouchableOpacity>
 
             <View style={styles.subContainer}>
-        <Pressable style={styles.subButton}>
+        <Pressable style={styles.subButton} >
           <Text style={styles.subTxtButton} 
           onPress={()=> navigation.navigate('Inicial')}> Agora não </Text>
         </Pressable>

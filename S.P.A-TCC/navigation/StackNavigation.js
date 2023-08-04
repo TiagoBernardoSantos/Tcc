@@ -9,6 +9,7 @@ import Instrucoes from "../components/instrucoes";
 import QRcode from "../components/QRcode";
 
 import BottomTab from './BottomTab';
+import Inicial from '../components/inicial';
 
 const Stack = createStackNavigator();
 
@@ -59,6 +60,13 @@ const StackNavigator = () => {
           component={QRcode}
           options={{ title: "", headerTransparent: true, headerLeft: null }}
         />
+        <Stack.Screen
+          name="inicial"
+          component={Inicial}
+          options={{ title: "", headerTransparent: true, headerLeft: null }}
+        />
+
+        
       </Stack.Navigator>
   );
 }

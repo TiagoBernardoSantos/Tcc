@@ -31,12 +31,15 @@ export default function Cadastro({navigation}) {
         
       />
 
-      <TouchableOpacity style={styles.formButton}>
-        <Text style={styles.txtButton}  onPress={()=> navigation.navigate('Inicial')} > Entrar </Text>
+      <TouchableOpacity style={styles.formButton}
+      onPress={()=> navigation.navigate('Home')}>
+        <Text style={styles.txtButton}> Entrar </Text>
       </TouchableOpacity>
+
         <View style={styles.subContainer}>
-        <Pressable style={styles.subButton}>
-          <Text style={styles.subTxtButton} onPress={()=> navigation.navigate('Login')}> Já possui uma conta?</Text>
+        <Pressable style={styles.subButton}
+        onPress={()=> navigation.navigate('Login')}>
+          <Text style={styles.subTxtButton} > Já possui uma conta?</Text>
         </Pressable>
       </View>
 

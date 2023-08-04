@@ -26,8 +26,9 @@ export default function Login({ navigation }) {
         placeholder='Digite sua senha...'
         autoComplete="password"
       />
-      <TouchableOpacity style={styles.formButton}>
-        <Text style={styles.txtButton} onPress={() => navigation.navigate('Bem Vindo')}> Entrar </Text>
+      <TouchableOpacity style={styles.formButton}
+      onPress={() => navigation.navigate('Bem Vindo')}>
+        <Text style={styles.txtButton} > Entrar </Text>
       </TouchableOpacity>
       <View style={styles.subContainer}>
         <Pressable style={styles.subButton}>
@@ -36,8 +37,9 @@ export default function Login({ navigation }) {
       </View>
 
       <View style={styles.subContainer}>
-        <Pressable style={styles.subButton}>
-          <Text style={styles.subTxtButton} onPress={() => navigation.navigate('Cadastro')}> Inscrever-se </Text>
+        <Pressable style={styles.subButton}
+        onPress={() => navigation.navigate('Cadastro')}>
+          <Text style={styles.subTxtButton} > Inscrever-se </Text>
         </Pressable>
       </View>
     </View>
