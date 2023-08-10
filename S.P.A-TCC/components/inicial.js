@@ -36,7 +36,12 @@ export default function Inicial({ navigation }) {
                 color={"white"}
                 alignItems="center"
                 justifyContent="center"
-              />
+              
+                onPress={() => navigation.navigate('Chat')}>
+
+                </MaterialCommunityIcons>
+              
+              
             </TouchableOpacity>
           </View>
         </View>

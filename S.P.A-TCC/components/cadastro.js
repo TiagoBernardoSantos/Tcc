@@ -27,6 +27,16 @@ export default function Cadastro({navigation}) {
       <TextInput style={styles.formInput}
         autoCapitalize="none"
         placeholder='Digite seu nome completo...'
+        autoComplete="tel"
+        dataDetectorTypes="phoneNumber"
+        keyboardType="numeric"
+
+      />
+
+<Text style={{fontSize: 17}}>Telefone:</Text>
+      <TextInput style={styles.formInput}
+        autoCapitalize="none"
+        placeholder='Digite seu número de telefone...'
         autoComplete="name"
         
       />

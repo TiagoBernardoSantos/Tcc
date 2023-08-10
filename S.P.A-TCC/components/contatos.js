@@ -96,6 +96,8 @@ const styles = StyleSheet.create({
     width: "100%" /* horinzontal */,
     height: 150 /* vertical */,
     flexDirection: "row",
+    backgroundColor: "#fff",
+
   },
   margin: {
     borderColor: "black",

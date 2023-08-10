@@ -90,9 +90,10 @@ const styles = StyleSheet.create({
   },
   AreaInput:{
     flexDirection: 'row',
-    width: '90%',
+    width: '100%',
     height: 50,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center'
 
   },
   formInput: {
@@ -137,7 +138,9 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-
+    position: 'absolute',
+    top: 2,
+    right: 30,
   }
 
 });
