@@ -14,10 +14,17 @@ export default function Chat({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.subConteinerChat}>
-        <MaterialCommunityIcons name="arrow-left" size={30} />
+        <MaterialCommunityIcons
+          name="arrow-left"
+          size={30}
+          color={"white"}
+          onPress={() => navigation.navigate("Inicial")}
+        />
         <Text style={styles.text}>Chat</Text>
-        <MaterialCommunityIcons name="menu" size={30} />
+        <MaterialCommunityIcons name="menu" size={30} color={"white"} />
       </View>
+
+      <TouchableOpacity onPress={() => navigation.navigate("mensagem")}>
       <View style={styles.subContainer}>
         <View style={styles.img}>
           <MaterialCommunityIcons
@@ -31,7 +38,11 @@ export default function Chat({ navigation }) {
           <Text style={styles.txtnome}> Pai </Text>
         </View>
       </View>
+      </TouchableOpacity>
+
       <View style={styles.margin}></View>
+
+      <TouchableOpacity onPress={() => navigation.navigate("mensagem")}>
       <View style={styles.subContainer}>
         <View style={styles.img}>
           <MaterialCommunityIcons
@@ -45,20 +56,25 @@ export default function Chat({ navigation }) {
           <Text style={styles.txtnome}> Mãe </Text>
         </View>
       </View>
+      </TouchableOpacity>
+
       <View style={styles.margin}></View>
-      <View style={styles.subContainer}>
-        <View style={styles.img}>
-          <MaterialCommunityIcons
-            name="account-circle"
-            size={70}
-            alignItems="center"
-            justifyContent="center"
-          />
+
+      <TouchableOpacity onPress={() => navigation.navigate("mensagem")}>
+        <View style={styles.subContainer}>
+          <View style={styles.img}>
+            <MaterialCommunityIcons
+              name="account-circle"
+              size={70}
+              alignItems="center"
+              justifyContent="center"
+            />
+          </View>
+          <View style={styles.info}>
+            <Text style={styles.txtnome}> Irmã </Text>
+          </View>
         </View>
-        <View style={styles.info}>
-          <Text style={styles.txtnome}> Irmã </Text>
-        </View>
-      </View>
+      </TouchableOpacity>
       <View style={styles.margin}></View>
     </View>
   );
@@ -90,6 +106,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
     width: "100%" /* horinzontal */,
+    marginTop: -80,
   },
   text: {
     color: "#fff",

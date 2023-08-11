@@ -8,6 +8,7 @@ import BV from "../components/telabv";
 import Instrucoes from "../components/instrucoes";
 import QRcode from "../components/QRcode";
 import chat from "../components/chat";
+import Mensagem from "../components/mensagem";
 import BottomTab from './BottomTab';
 import Inicial from '../components/inicial';
 
@@ -68,6 +69,11 @@ const StackNavigator = () => {
          <Stack.Screen
           name="Chat"
           component={chat}
+          options={{ title: "", headerTransparent: true, headerLeft: null }}
+        />
+        <Stack.Screen
+          name="mensagem"
+          component={Mensagem}
           options={{ title: "", headerTransparent: true, headerLeft: null }}
         />
 
