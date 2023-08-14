@@ -14,18 +14,44 @@ export default function Mensagem({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.subConteinerChat}>
-      <MaterialCommunityIcons
+        <MaterialCommunityIcons
           name="arrow-left"
           size={30}
-          color= "white"
+          color="white"
+          onPress={() => navigation.navigate("Chat")}
         />
         <View style={styles.icon}>
-        <MaterialCommunityIcons name="account-circle" size={60} />
-       <Text style={styles.text}>Mãe</Text> 
-       </View>
-        
-        
+          <MaterialCommunityIcons name="account-circle" size={60} />
+          <Text style={styles.text}>Mãe</Text>
+        </View>
       </View>
+      <View style={styles.subContainer}>
+
+
+        <View style={styles.box1}></View>
+        <View style={styles.box2}></View>
+        <View style={styles.box3}></View>
+        
+        <View style={styles.containerBoxTxt}>
+          <TextInput style={styles.boxTxt}
+            placeholder='Mensagem'
+          >
+            <MaterialCommunityIcons
+              
+              name="send"
+              size={30}
+              color={"#114D9D"}
+             right= {60}
+              
+            />
+
+          </TextInput>
+        </View>
+      </View>
+
+
+
+
     </View>
   );
 }
@@ -38,16 +64,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   subContainer: {
-    /*flexDirection: 'column',   */
-    width: "100%" /* horinzontal */,
-    height: 150 /* vertical */,
-    flexDirection: "row",
+    flex: 1,
+   
   },
   icon: {
     alignItems: "center",
     justifyContent: "flex-start",
     flexDirection: "row",
     gap: 20,
+  },
+  iconSend: {
+    width: "15%",
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    top: 8,
+    right: 12,
   },
   subConteinerChat: {
     backgroundColor: "#ADABAA",
@@ -70,36 +103,53 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
   },
-  img: {
-    /*flexDirection: 'column',   */
+
+  containerBoxTxt: {
+    position: 'relative',
+    top: '65%',
+    alignItems: 'center',
+    justifyContent: 'center',
+
   },
 
-  font: {
-    color: "black",
-    fontSize: 35,
-    marginTop: 20,
+  boxTxt: {
+    backgroundColor: '#11ffee00',
+    borderColor: '#99A694',
+    borderWidth: 2,
+    borderRadius: 70,
+    width: '85%',
+    height: 65,
+    padding: 10,
+    margin: 10,
+    alignItems: 'flex-end',
   },
-  txtnome: {
-    flexDirection: "row",
-    display: "flex",
-    fontSize: 30,
+  box1: {
+    width: '70%',
+    height: 60,
+    top: '10%',
+    backgroundColor: '#11ffee00',
+    borderColor: '#99A694',
+    borderWidth: 2,
+    borderRadius: 70,
   },
-  txtnumero: {
-    flexDirection: "row",
-    display: "flex",
-    fontSize: 20,
+  box2: {
+    backgroundColor: '#11ffee00',
+    borderColor: '#99A694',
+    borderWidth: 2,
+    borderRadius: 70,
+    width: '70%',
+    height: 60,
+    position: 'absolute',
+    top: '25%',
+    right: 0,
   },
-  subContainerbutton: {
-    alignItems: "flex-end",
-    justifyContent: "flex-start",
-    margin: 30,
-  },
-  button: {
-    backgroundColor: "red",
-    width: 55,
-    height: 55,
-    borderRadius: 150,
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  box3:{
+    width: '70%',
+    height: 60,
+    top: '30%',
+    backgroundColor: '#11ffee00',
+    borderColor: '#99A694',
+    borderWidth: 2,
+    borderRadius: 70,
+  }
 });

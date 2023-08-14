@@ -130,8 +130,9 @@ const styles = StyleSheet.create({
   subTxtButton: {
     color: '#FEB74E',
     marginLeft: 50,
-    fontSize: 17,
+    fontSize: 20,
     alignItems: 'center',
+    fontWeight: 'bold',
   },
   Icon: {
     width: "15%",

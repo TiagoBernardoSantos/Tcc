@@ -21,7 +21,7 @@ export default function Chat({ navigation }) {
           onPress={() => navigation.navigate("Inicial")}
         />
         <Text style={styles.text}>Chat</Text>
-        <MaterialCommunityIcons name="menu" size={30} color={"white"} />
+        <MaterialCommunityIcons name="dots-vertical" size={30} color={"white"} />
       </View>
 
       <TouchableOpacity onPress={() => navigation.navigate("mensagem")}>
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "row",
-    gap: 140,
+    gap: 130,
   },
   margin: {
     borderColor: "black",
