@@ -35,7 +35,7 @@ export default function Login({ navigation }) {
           secureTextEntry={hidePass}
           placeholder='Digite sua senha...'
           value={input}
-          maxLength={6}
+          maxLength={15}
           onChangeText={(texto) => setImput(texto)}
             />
 
@@ -55,7 +55,7 @@ export default function Login({ navigation }) {
 
 
       <TouchableOpacity style={styles.formButton}
-        onPress={() => navigation.navigate('Bem Vindo')}>
+        onPress={() => navigation.navigate('Home')}>
         <Text style={styles.txtButton} > Entrar </Text>
       </TouchableOpacity>
       <View style={styles.subContainer}>

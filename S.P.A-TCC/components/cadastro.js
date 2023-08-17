@@ -60,9 +60,8 @@ export default function Cadastro({ navigation }) {
       <TextInput style={styles.formInput}
         autoCapitalize="none"
         placeholder='Digite seu nome completo...'
-        autoComplete="tel"
-        dataDetectorTypes="phoneNumber"
-        keyboardType="numeric"
+        autoComplete="name"
+       
 
       />
 
@@ -72,12 +71,16 @@ export default function Cadastro({ navigation }) {
       <TextInput style={styles.formInput}
         autoCapitalize="none"
         placeholder='Digite seu número de telefone...'
-        autoComplete="name"
+        autoComplete="tel"
+        dataDetectorTypes="phoneNumber"
+        keyboardType="numeric"
+        maxLength={16}
+
 
       />
 
       <TouchableOpacity style={styles.formButton}
-        onPress={() => navigation.navigate('Home')}>
+        onPress={() => navigation.navigate('Bem Vindo')}>
         <Text style={styles.txtButton}> Entrar </Text>
       </TouchableOpacity>
 

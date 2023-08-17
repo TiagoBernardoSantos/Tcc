@@ -43,7 +43,7 @@ export default function Instrucoes({ navigation }) {
         <Pressable style={styles.subButton}>
           <Text
             style={styles.subTxtButton}
-            onPress={() => navigation.navigate("Inicial")}
+            onPress={() => navigation.navigate("Home")}
           >
             {" "}
             Agora não{" "}

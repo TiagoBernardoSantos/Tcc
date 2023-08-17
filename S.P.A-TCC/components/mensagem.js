@@ -33,25 +33,25 @@ export default function Mensagem({ navigation }) {
         <View style={styles.box3}></View>
         
         <View style={styles.containerBoxTxt}>
+       
           <TextInput style={styles.boxTxt}
             placeholder='Mensagem'
           >
-            <MaterialCommunityIcons
+          </TextInput>
+          <View style={styles.iconSend}>
+        <MaterialCommunityIcons
               
               name="send"
               size={30}
               color={"#114D9D"}
-             right= {60}
+             right= {30}
+
               
             />
-
-          </TextInput>
+        </View>
+        
         </View>
       </View>
-
-
-
-
     </View>
   );
 }
@@ -74,10 +74,10 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   iconSend: {
-    width: "15%",
-    height: 50,
+    width: "10%",
+    height: 70,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     position: 'absolute',
     top: 8,
     right: 12,
@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
     top: '65%',
     alignItems: 'center',
     justifyContent: 'center',
-
   },
 
   boxTxt: {

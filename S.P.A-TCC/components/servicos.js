@@ -196,3 +196,5 @@ const styles = StyleSheet.create({
     margin: 10,
   },
 });
+
+/* https://www.npmjs.com/package/react-native-phone-call (Para realizar ligação) */
