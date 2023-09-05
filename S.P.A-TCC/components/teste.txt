@@ -1,91 +1,86 @@
-PAGINA INICIAL
-
 import { StatusBar } from "expo-status-bar";
-import React from 'react';
-import MapView from "react-native-maps";
-import { Dimensions } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {
   Pressable,
-  ScrollView,
   StyleSheet,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 
-
-export default function Inicial({ navigation }) {
+export default function Mensagem({ navigation }) {
   return (
-      <View style={styles.container}>
-
-         <MapView 
-                style={styles.map}
-                initialRegion={{
-                    latitude: -23.219714783225502, 
-                    longitude: -45.90677050516793,
-                
-          }}
-          />
-
-        <View style={styles.subConteiner}>
-          <Text style={styles.text}>Home</Text>
-
-          <View style={styles.subContainerbutton}>
-            <View style={styles.button}>
-              <TouchableOpacity>
-                <MaterialCommunityIcons
-                  name="message-bulleted"
-                  size={30}
-                  color={"white"}
-                  alignItems="center"
-                  justifyContent="center"
-
-                  onPress={() => navigation.navigate('Chat')}>
-
-                </MaterialCommunityIcons>
-              </TouchableOpacity>
-            </View>
-          </View>
+    <View style={styles.container}>
+      <View style={styles.subConteinerChat}>
+        <MaterialCommunityIcons
+          name="arrow-left"
+          size={30}
+          color="white"
+          onPress={() => navigation.navigate("Chat")}
+        />
+        <View style={styles.icon}>
+          <MaterialCommunityIcons name="account-circle" size={60} />
+          <Text style={styles.text}>Mãe</Text>
         </View>
       </View>
+
+      
+      
+    </View>
   );
 }
-/* roda pé: https://www.youtube.com/watch?v=AnjyzruZ36E */
+ /* https://www.google.com/search?sca_esv=556828901&sxsrf=AB5stBjUcuRFmUXn-0fe8mwQ5OPvlgtvjQ:1692040962785&q=criar+uma+pagina+de+chat+no+react+native&spell=1&sa=X&ved=2ahUKEwjT1KDk79yAAxVaDrkGHa8wAmEQBSgAegQICBAB&biw=1280&bih=603&dpr=1.5#fpstate=ive&vld=cid:90ab0cd2,vid:oknHE4Dr6Uo */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: "100%",
+    gap: 2,
+    backgroundColor: "#fff",
   },
-  subConteiner: {
-    backgroundColor: "#114D9D",
+  subContainer: {
+    /*flexDirection: 'column',   */
+    width: "100%" /* horinzontal */,
+    height: 150 /* vertical */,
+    flexDirection: "row",
+  },
+  icon: {
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flexDirection: "row",
+    gap: 20,
+  },
+  subConteinerChat: {
+    backgroundColor: "#ADABAA",
     width: "100%",
     height: "15%",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "flex-start",
+    flexDirection: "row",
+    gap: 40,
+    paddingTop: 20,
+    paddingHorizontal: 20, /* espaçamento horizontal */
+  },
+  margin: {
+    borderColor: "black",
+    borderWidth: 1,
+    width: "100%" /* horinzontal */,
   },
   text: {
     color: "#fff",
-    fontSize: 40,
-    fontWeight: "bold"
+    fontSize: 30,
+    fontWeight: "bold",
   },
-  subContainerbutton: {
+
+  containerBoxTxt:{
+    backgroundColor: 'red',
+    
+  },
+
+  boxTxt: {
+    backgroundColor: 'black',
     alignItems: "flex-end",
     justifyContent: "flex-start",
-    margin: 390,
-    marginTop: 460,
-  },
-  button: {
-    backgroundColor: "#114D9D",
-    width: 55,
-    height: 55,
-    borderRadius: 150,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  map: {
-      ...StyleSheet.absoluteFillObject,
-      height: Dimensions.get("window").height,
   },
 });

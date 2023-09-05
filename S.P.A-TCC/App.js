@@ -1,5 +1,6 @@
+import 'react-native-gesture-handler';
 import * as React from "react";
-import { MapView } from "react-native-maps";
+
 
 import { Text, View, StyleSheet } from "react-native";
 import Constants from "expo-constants";
