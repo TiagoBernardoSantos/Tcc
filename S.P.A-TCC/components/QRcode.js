@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Image } from "expo-image";
-import Clipboard from "@react-native-community/clipboard";
+import * as Clipboard from 'expo-clipboard';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StatusBar } from "expo-status-bar";
 import {
@@ -9,31 +9,52 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   View,
 } from "react-native";
 
+
+let charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
 export default function QRcode({ navigation }) {
-  /*typedText: variável que será usada para armazenar o texto digitado pelo usuário.*/
+  /typedText: variável que será usada para armazenar o texto digitado pelo usuário./
   /*copiedText: variável que será usada para armazenar o texto recuperado da área de transferência.
 https://developerplus.com.br/como-copiar-para-area-de-transferencia-no-react-nativeclipboard/
 */
+  const [password, setPassword] = useState('');
+  const [size, setSize] = useState(8);
+  const [clickCount, setClickCount] = useState(0);
 
-  const [typedText, setTypedText] = useState("");
-  const [copiedText, setCopiedText] = useState("");
+
+  function generatePass() {
+
+    if (clickCount == 0) {
+      let pass = '';
+      for (let i = 0, n = charset.length; i < size; i++) {
+        pass += charset.charAt(Math.floor(Math.random() * n));
+      }
+      setPassword(pass);
+      setClickCount(1)
+    }
+
+  };
+
+  /* FUNÇÃO DE CÓPIA */
+
+  /* -- a função password armazena o código criado -- */
+  const [copiedText, setCopiedText] = useState('');
 
   const copyToClipboard = () => {
-    Clipboard.setString(typedText);
-    alert("Texto Copiado!");
-  };
+    Clipboard.setString(password);
+    alert("Texto Copiado!" + password);
+  }
+
   const fetchCopiedText = async () => {
     const text = await Clipboard.getString();
     setCopiedText(text);
   }
 
-
   return (
-    
+
     <View style={styles.container}>
       <Text style={styles.txtTitle}>
         {" "}
@@ -42,25 +63,45 @@ https://developerplus.com.br/como-copiar-para-area-de-transferencia-no-react-nat
 
       <StatusBar style="auto" />
 
-      <Image style={styles.image} source={require("../assets/QRcode.png")} />
+      <Image style={styles.image} source={require("../assets/QRcode.png")}
+      />
 
-      <TouchableOpacity style={styles.formButton1}>
-        <Text style={styles.txtButton1} onPress={() => copyToClipboard()}>
-          <MaterialCommunityIcons
-            name="content-copy"
-            size={20} />
-            CCC-6565
+      <TouchableOpacity style={styles.formButton1}
+        onChangeText={password => setPassword(password)}
+        defaultValue={password}
+        onPress={copyToClipboard} >
+
+
+
+        <MaterialCommunityIcons
+          name="content-copy"
+          size={20}
+        />
+
+        <Text style={styles.txtButton1}  >
+          {password}
         </Text>
+
       </TouchableOpacity>
+
+      <MaterialCommunityIcons
+        name="key-variant"
+        size={30}
+        onPress={generatePass}
+      />
+
 
       <Text style={styles.txt}>
         {" "}
-        Você pode compartilhar esse código através de e-mail, mensagem,
+        Clique na chave para gerar um código {" "}
+        
+         Você conseguirá compartilhar esse código através de e-mail, mensagem,
         pessoalmente ou até QR Code{" "}
       </Text>
 
       <TouchableOpacity style={styles.formButton}
-      onPress={() => navigation.navigate('Home')} >
+
+        onPress={() => navigation.navigate('Home')} >
         <Text
           style={styles.txtButton}
         >
@@ -115,6 +156,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.9,
     shadowRadius: 9.11,
     elevation: 14,
+    flexDirection: 'row',
   },
 
   txtButton: {
@@ -127,6 +169,7 @@ const styles = StyleSheet.create({
     color: "#000000",
     fontSize: 22,
     fontWeight: "bold",
+    marginLeft: 20,
   },
   subContainer: {
     flexDirection: "row",
@@ -151,3 +194,7 @@ const styles = StyleSheet.create({
     color: "#FEB74E",
   },
 });
+
+/*  https://github.com/vespidhook/geradorDeSenha/blob/main/App.js 
+    https://www.google.com/search?q=gerador+automatico+de+qrcode+react+native&sca_esv=561038293&ei=ayruZLjdH-nU1sQPkpKCiAo&oq=gerador+autode+qrcode+react+native&gs_lp=Egxnd3Mtd2l6LXNlcnAiImdlcmFkb3IgYXV0b2RlIHFyY29kZSByZWFjdCBuYXRpdmUqAggAMgoQIRigARjDBBgKMgoQIRigARjDBBgKSPEiUK0PWOsTcAF4AZABAJgBiwGgAYQEqgEDMC40uAEDyAEA-AEBwgIKEAAYRxjWBBiwA8ICBRAAGKIE4gMEGAAgQYgGAZAGCA&sclient=gws-wiz-serp#fpstate=ive&vld=cid:607565ee,vid:cFaihdXLy5A
+*/
