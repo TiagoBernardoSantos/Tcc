@@ -11,6 +11,63 @@ import {
 export default function Cadastro({ navigation }) {
   const [input, setImput] = useState('');
   const [hidePass, setHidePass] = useState(true);
+
+
+
+  const [cd_usuario, setcd_usuario] = useState(0);
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [telefone, setTelefone] = useState('');
+
+
+
+  const [timeOut, setTimeOut] = useState(10000);
+  const [loading, setLoading] = useState(false);
+  const [acess, setAcess] = useState(false);
+  const [msg, setMsg] = useState('');
+
+  
+async function cadastrar() {
+    setLoading(true);
+    var url = 'https://tccspa.000webhostapp.com/cadastro.php';
+
+    var wasServerTimeout = false;
+    var timeout = setTimeout(() => {
+      wasServerTimeout = true;
+      alert('Tempo de espera para busca de informações excedido');
+    }, timeOut);
+
+    const resposta = await fetch(url, {
+      method: 'POST', //tipo de requisição
+      body: JSON.stringify({ nome: nome, senha: senha, email: email, telefone: telefone }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        timeout && clearTimeout(timeout);
+        if (!wasServerTimeout) {
+          return response.json();
+        }
+      })
+      .then((responseJson) => {
+        alert(JSON.stringify(responseJson.informacoes[0].msg));
+      })
+      //se ocorrer erro na requisição ou conversãok
+      .catch((error) => {
+        timeout && clearTimeout(timeout);
+        if (!wasServerTimeout) {
+          //Error logic here
+        }
+
+        alert('erro'+error)
+      });
+
+    setLoading(false);
+  }
+
+  
   return (
     <View style={styles.container}>
       <Text style={styles.txtTitle}> Inscrever-se </Text>
@@ -24,7 +81,8 @@ export default function Cadastro({ navigation }) {
         autoCapitalize="none"
         placeholder='Digite seu e-mail...'
         autoComplete="email"
-
+        onChangeText={(texto)=>setEmail(texto)}
+        value  = {email}
       />
       <Text style={styles.txtSubTitle}>
         Senha:
@@ -35,9 +93,9 @@ export default function Cadastro({ navigation }) {
           style={styles.formInput}
           secureTextEntry={hidePass}
           placeholder='Digite sua senha...'
-          value={input}
           maxLength={6}
-          onChangeText={(texto) => setImput(texto)}
+          onChangeText={(texto)=>setSenha(texto)}
+          value = {senha}
         />
 
 
@@ -61,7 +119,8 @@ export default function Cadastro({ navigation }) {
         autoCapitalize="none"
         placeholder='Digite seu nome completo...'
         autoComplete="name"
-       
+        onChangeText={(texto)=>setNome(texto)}
+        value  = {nome}
 
       />
 
@@ -75,12 +134,15 @@ export default function Cadastro({ navigation }) {
         dataDetectorTypes="phoneNumber"
         keyboardType="numeric"
         maxLength={16}
-
+        onChangeText={(texto)=>setTelefone(texto)}
+        value  = {telefone}
 
       />
 
       <TouchableOpacity style={styles.formButton}
-        onPress={() => navigation.navigate('Bem Vindo')}>
+        onPress={() => cadastrar()}
+       
+        >
         <Text style={styles.txtButton}> Entrar </Text>
       </TouchableOpacity>
 
@@ -94,6 +156,7 @@ export default function Cadastro({ navigation }) {
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
