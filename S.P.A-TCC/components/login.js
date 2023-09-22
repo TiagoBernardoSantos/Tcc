@@ -12,6 +12,73 @@ export default function Login({ navigation }) {
   const [hidePass, setHidePass] = useState(true);
 
 
+  const [cd_usuario, setcd_usuario] = useState(0);
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+
+
+  const [timeOut, setTimeOut] = useState(10000);
+  const [loading, setLoading] = useState(false);
+  const [acess, setAcess] = useState(false);
+  const [msg, setMsg] = useState('');
+
+/* login */
+
+  async function logar() {
+    setLoading(true);
+    var url = 'https://tccspa.000webhostapp.com/login.php';
+
+    var wasServerTimeout = false;
+    var timeout = setTimeout(() => {
+      wasServerTimeout = true;
+      alert('Tempo de espera para busca de informações excedido');
+    }, timeOut);
+
+    const resposta = await fetch(url, {
+      method: 'POST', //tipo de requisição
+      body: JSON.stringify({ email: email }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        timeout && clearTimeout(timeout);
+        if (!wasServerTimeout) {
+          return response.json();
+        }
+      })
+      .then((responseJson) => {
+        if (responseJson.informacoes[0].cd_usuario == 0) {
+          alert('Informação não econtrada!');
+          setcd_usuario(0);
+        } else {
+          // atualiza tela do frontend
+        /*   setcd_usuario(responseJson.informacoes[0].cd_usuario);
+          setEmail(responseJson.informacoes[0].email);
+          setSenha(responseJson.informacoes[0].senha);
+          */
+          alert('Informação econtrada!');
+        }
+      })
+      //se ocorrer erro na requisição ou conversãok
+      .catch((error) => {
+        timeout && clearTimeout(timeout);
+        if (!wasServerTimeout) {
+          //Error logic here
+        }
+
+        //  alert('erro'+error)
+      });
+
+    setLoading(false); 
+
+
+/*     alert('ook')
+ */  }
+
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.txtTitle}> Conecte-se </Text>
@@ -24,7 +91,8 @@ export default function Login({ navigation }) {
         autoComplete="email"
         maxLength={40}
         placeholder='Digite seu e-mail...'
-        value={''}
+        onChangeText={(texto) => setEmail(texto)}
+        value={email}
       />
       <Text style={{ fontSize: 25 }}>Senha:</Text>
 
@@ -34,9 +102,10 @@ export default function Login({ navigation }) {
         style={styles.formInput}
           secureTextEntry={hidePass}
           placeholder='Digite sua senha...'
-          value={input}
+          value={senha}
           maxLength={15}
-          onChangeText={(texto) => setImput(texto)}
+          onChangeText={(texto) => setSenha(texto)}
+
             />
 
 
@@ -55,7 +124,7 @@ export default function Login({ navigation }) {
 
 
       <TouchableOpacity style={styles.formButton}
-        onPress={() => navigation.navigate('Home')}>
+       onPress={() => logar()}>
         <Text style={styles.txtButton} > Entrar </Text>
       </TouchableOpacity>
       <View style={styles.subContainer}>
