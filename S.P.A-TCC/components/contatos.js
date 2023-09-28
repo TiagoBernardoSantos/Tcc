@@ -1,6 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import * as Contacts from 'expo-contacts';
+import ListaContatos from "./listaContatos";
 import {
   Pressable,
   ScrollView,
@@ -11,11 +13,27 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useState } from "react";
 
-const image = { require: "./assets/map.png" };
-/* https://reactnative.dev/docs/imagebackground */
+/* https://www.youtube.com/watch?v=J_rOcXu0a3c */
 
 export default function Contatos({ navigation }) {
+
+ /* states */
+const [contatos, setContatos] = useState({nome: '', telefone: ''})
+const [listaContatos, setListaContatos] = useState([])
+
+/* métodos */
+function Name(event){
+  setContatos({...contatos, nome: event.target.value})
+}
+function Phone(event){
+  setContatos({...contatos, telefone: event.target.value})
+}
+function adicionarContatos(event){
+  setListaContatos([...listaContatos, contatos])
+  console.table(listaContatos)
+}
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -80,7 +98,9 @@ export default function Contatos({ navigation }) {
           </View>
         </View>
       </View>
+      <ListaContatos listaContatos={listaContatos}/>
     </ScrollView>
+    
   );
 }
 /* roda pé: https://www.youtube.com/watch?v=AnjyzruZ36E */
@@ -138,3 +158,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+
+/*https://docs.expo.dev/versions/latest/sdk/contacts/
+https://snack.expo.dev/@luispreis/bff6fb?platform=android */
