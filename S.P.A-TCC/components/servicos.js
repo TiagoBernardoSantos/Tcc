@@ -9,9 +9,49 @@ import {
   Image,
   TouchableOpacity,
   View,
+  Platform,
+  Linking,
 } from "react-native";
 
 export default function Serviços({ navigation }) {
+  
+  const makePhoneCallBomb = () => {
+    if (Platform.OS === "android") {
+      Linking.openURL("tel: 193")
+    }
+    else{
+      Linking.openURL("telpromt:193")
+    }
+  }
+
+  const makePhoneCallAmb = () => {
+    if (Platform.OS === "android") {
+      Linking.openURL("tel:192")
+    }
+    else{
+      Linking.openURL("telpromt:192")
+    }
+  }
+  const makePhoneCallCvv = () => {
+    if (Platform.OS === "android") {
+      Linking.openURL("tel:188")
+    }
+    else{
+      Linking.openURL("telpromt:188")
+    }
+  }
+
+  const makePhoneCallPol = () => {
+    if (Platform.OS === "android") {
+      Linking.openURL("tel:190")
+    }
+    else{
+      Linking.openURL("telpromt:190")
+    }
+  }
+  
+  
+  
   return (
     <View style={styles.container}>
       <View style={styles.subContainer}>
@@ -24,10 +64,12 @@ export default function Serviços({ navigation }) {
             />
           <Text style={styles.txt}>Policia</Text>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button}
+          onPress={() => makePhoneCallPol()}
+          >
+            
             <Text
               style={styles.txtButton}
-              onPress={() => navigation.navigate("Instruções")}
             >
               Ligar
             </Text>
@@ -43,10 +85,11 @@ export default function Serviços({ navigation }) {
           <Text style={styles.txt}>Ambulância</Text>
 
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button}
+          onPress={() => makePhoneCallAmb()}
+          >
             <Text
               style={styles.txtButton}
-              onPress={() => navigation.navigate("Instruções")}
             >
               Ligar
             </Text>
@@ -63,10 +106,11 @@ export default function Serviços({ navigation }) {
             />
           <Text style={styles.txt}>CVV</Text>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button}
+           onPress={() => makePhoneCallCvv()}
+          >
             <Text
               style={styles.txtButton}
-              onPress={() => navigation.navigate("Instruções")}
             >
               Ligar
             </Text>
@@ -81,10 +125,11 @@ export default function Serviços({ navigation }) {
             />
           <Text style={styles.txt}>Bombeiros</Text>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} 
+           onPress={() => makePhoneCallBomb()}
+          >
             <Text
               style={styles.txtButton}
-              onPress={() => navigation.navigate("Instruções")}
             >
               Ligar
             </Text>
@@ -198,3 +243,4 @@ const styles = StyleSheet.create({
 });
 
 /* https://www.npmjs.com/package/react-native-phone-call (Para realizar ligação) */
+/*https://github.com/wumke/react-native-immediate-phone-call (Ligar instantaneamente)*/

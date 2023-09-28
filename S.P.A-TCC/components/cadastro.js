@@ -13,7 +13,16 @@ export default function Cadastro({ navigation }) {
   const [hidePass, setHidePass] = useState(true);
 
 
+  /* passagem de parametros */
+  const FirstPage = ({ navigation }) => {
+    const [nome, setNome] = useState('');
+    const [sobrenome, setSobrenome] = useState('');
+    const [idade, setidade] = useState('');
+  }
 
+
+
+/* BANCO DE DADOS */
   const [cd_usuario, setcd_usuario] = useState(0);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -52,9 +61,17 @@ async function cadastrar() {
         }
       })
       .then((responseJson) => {
-        alert(JSON.stringify(responseJson.informacoes[0].msg));
+        if (email !== '' && senha !== '' && email !== '' && telefone !== '' && nome!== '') {
+            alert('Cadastro Concluido com Sucesso');
+        navigation.navigate('Bem Vindo');
+        }
+      else{
+        alert('Informações não inseridas!');
+
+      }
+
       })
-      //se ocorrer erro na requisição ou conversãok
+      //se ocorrer erro na requisição ou conversão
       .catch((error) => {
         timeout && clearTimeout(timeout);
         if (!wasServerTimeout) {
@@ -83,6 +100,7 @@ async function cadastrar() {
         autoComplete="email"
         onChangeText={(texto)=>setEmail(texto)}
         value  = {email}
+        
       />
       <Text style={styles.txtSubTitle}>
         Senha:
@@ -93,7 +111,7 @@ async function cadastrar() {
           style={styles.formInput}
           secureTextEntry={hidePass}
           placeholder='Digite sua senha...'
-          maxLength={6}
+          maxLength={20}
           onChangeText={(texto)=>setSenha(texto)}
           value = {senha}
         />

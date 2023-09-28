@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Image } from "expo-image";
+import QRCode from 'react-qr-code';
 import * as Clipboard from 'expo-clipboard';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StatusBar } from "expo-status-bar";
@@ -45,7 +46,7 @@ https://developerplus.com.br/como-copiar-para-area-de-transferencia-no-react-nat
 
   const copyToClipboard = () => {
     Clipboard.setString(password);
-    alert("Texto Copiado!" + password);
+    alert("Texto Copiado!");
   }
 
   const fetchCopiedText = async () => {
@@ -63,8 +64,13 @@ https://developerplus.com.br/como-copiar-para-area-de-transferencia-no-react-nat
 
       <StatusBar style="auto" />
 
-      <Image style={styles.image} source={require("../assets/QRcode.png")}
+      <QRCode
+       value={password}
+       size={200}
+       style={{ height: "auto", maxWidth: "100%", width: "100%", marginBottom:"20",}}
       />
+         
+    
 
       <TouchableOpacity style={styles.formButton1}
         onChangeText={password => setPassword(password)}
@@ -94,9 +100,11 @@ https://developerplus.com.br/como-copiar-para-area-de-transferencia-no-react-nat
       <Text style={styles.txt}>
         {" "}
         Clique na chave para gerar um código {" "}
-        
-         Você conseguirá compartilhar esse código através de e-mail, mensagem,
-        pessoalmente ou até QR Code{" "}
+      </Text>
+
+      <Text style={styles.txt1}>
+      Você conseguirá compartilhar esse código através de e-mail, mensagem,
+      pessoalmente ou até QR Code{" "}
       </Text>
 
       <TouchableOpacity style={styles.formButton}
@@ -187,14 +195,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   txt: {
+    fontSize: 14,
+    fontWeight: "bold",
+    textAlign: 'center',
+    margin: 10,
+    color: "#FEB74E",
+  },
+
+  txt1: {
     fontSize: 16,
     fontWeight: "bold",
     textAlign: 'center',
-    margin: 25,
+    margin: 15,
     color: "#FEB74E",
   },
+
 });
 
 /*  https://github.com/vespidhook/geradorDeSenha/blob/main/App.js 
     https://www.google.com/search?q=gerador+automatico+de+qrcode+react+native&sca_esv=561038293&ei=ayruZLjdH-nU1sQPkpKCiAo&oq=gerador+autode+qrcode+react+native&gs_lp=Egxnd3Mtd2l6LXNlcnAiImdlcmFkb3IgYXV0b2RlIHFyY29kZSByZWFjdCBuYXRpdmUqAggAMgoQIRigARjDBBgKMgoQIRigARjDBBgKSPEiUK0PWOsTcAF4AZABAJgBiwGgAYQEqgEDMC40uAEDyAEA-AEBwgIKEAAYRxjWBBiwA8ICBRAAGKIE4gMEGAAgQYgGAZAGCA&sclient=gws-wiz-serp#fpstate=ive&vld=cid:607565ee,vid:cFaihdXLy5A
 */
+
+/* npm i react-qr-code */

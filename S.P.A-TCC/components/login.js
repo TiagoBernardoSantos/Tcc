@@ -23,7 +23,7 @@ export default function Login({ navigation }) {
   const [acess, setAcess] = useState(false);
   const [msg, setMsg] = useState('');
 
-/* login */
+  /* login */
 
   async function logar() {
     setLoading(true);
@@ -49,19 +49,35 @@ export default function Login({ navigation }) {
         }
       })
       .then((responseJson) => {
-        if (responseJson.informacoes[0].cd_usuario == 0) {
-          alert('Informação não econtrada!');
-          setcd_usuario(0);
-        } else {
-          // atualiza tela do frontend
-        /*   setcd_usuario(responseJson.informacoes[0].cd_usuario);
-          setEmail(responseJson.informacoes[0].email);
-          setSenha(responseJson.informacoes[0].senha);
-          */
-          alert('Informação econtrada!');
+
+        /* se houver informações */
+        if (email !== '' && senha !== '') {
+
+          if (responseJson.informacoes[0].cd_usuario == 0) {
+            alert('Informação não econtrada!');
+  
+  
+            setcd_usuario(0);
+          } else {
+            // atualiza tela do frontend
+             setcd_usuario(responseJson.informacoes[0].cd_usuario);
+              setEmail(responseJson.informacoes[0].email);
+              setSenha(responseJson.informacoes[0].senha);
+            
+            /*           alert('Informação econtrada!');
+             */
+            navigation.navigate('Home');
+           }
+
         }
+        else{
+          alert('Informações não inseridas!');
+
+        }
+  
+       
       })
-      //se ocorrer erro na requisição ou conversãok
+      //se ocorrer erro na requisição ou conversão
       .catch((error) => {
         timeout && clearTimeout(timeout);
         if (!wasServerTimeout) {
@@ -71,7 +87,7 @@ export default function Login({ navigation }) {
         //  alert('erro'+error)
       });
 
-    setLoading(false); 
+    setLoading(false);
 
 
 /*     alert('ook')
@@ -99,32 +115,33 @@ export default function Login({ navigation }) {
       <View style={styles.AreaInput} >
 
         <TextInput
-        style={styles.formInput}
+          style={styles.formInput}
           secureTextEntry={hidePass}
           placeholder='Digite sua senha...'
           value={senha}
-          maxLength={15}
+          maxLength={20}
           onChangeText={(texto) => setSenha(texto)}
 
-            />
+        />
 
 
-            <TouchableOpacity style={styles.Icon}
-        onPress={() => setHidePass(!hidePass)}>
+        <TouchableOpacity style={styles.Icon}
+          onPress={() => setHidePass(!hidePass)}>
           {hidePass ?
             <Ionicons name="eye" color="black" size={25} />
             :
             <Ionicons name="eye-off" color="black" size={25} />
           }
         </TouchableOpacity>
-        
 
-        
+
+
       </View>
 
 
       <TouchableOpacity style={styles.formButton}
-       onPress={() => logar()}>
+    onPress={() => logar()}>
+
         <Text style={styles.txtButton} > Entrar </Text>
       </TouchableOpacity>
       <View style={styles.subContainer}>
@@ -157,7 +174,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     margin: 40,
   },
-  AreaInput:{
+  AreaInput: {
     flexDirection: 'row',
     width: '100%',
     height: 50,
