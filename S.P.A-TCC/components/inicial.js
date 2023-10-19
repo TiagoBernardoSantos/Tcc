@@ -48,6 +48,23 @@ export default function Inicial({ navigation }) {
 </TouchableOpacity>
 </View>
 </View>
+
+<View style={styles.subContainerbutton1}>
+<View style={styles.button1}>
+<TouchableOpacity>
+<MaterialCommunityIcons
+               name="message-bulleted"
+               size={30}
+               color={"white"}
+               alignItems="center"
+               justifyContent="center"
+               onPress={() => navigation.navigate('Chat')}>
+
+</MaterialCommunityIcons>
+</TouchableOpacity>
+</View>
+</View>
+
 </View>
  );
 }
@@ -81,6 +98,14 @@ const styles = StyleSheet.create({
    margin: 390,
    marginTop: 460,
  },
+
+ subContainerbutton1: {
+  alignItems: "flex-end",
+  justifyContent: "flex-start",
+  margin: 350,
+  marginTop: 430,
+},
+
  button: {
    backgroundColor: "#114D9D",
    width: 55,
@@ -89,6 +114,16 @@ const styles = StyleSheet.create({
    alignItems: "center",
    justifyContent: "center",
  },
+ button1: {
+  backgroundColor: "#FEB74E",
+  width: 55,
+  height: 55,
+  borderRadius: 200,
+  alignItems: "center",
+  justifyContent: "center",
+},
+
+
  map: {
        ...StyleSheet.absoluteFillObject,
      },

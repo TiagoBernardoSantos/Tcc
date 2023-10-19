@@ -8,9 +8,23 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Linking,
 } from "react-native";
 
+
 export default function Chat({ navigation }) {
+  const appScheme = 'whatsapp';
+  Linking.canOpenURL(appScheme)
+  .then(supported => {
+    if (supported) {
+      // Abra o aplicativo
+      Linking.openURL(appScheme);
+    } else {
+      console.log('Não é possível abrir o aplicativo ${appScheme}');
+    }
+  })
+  .catch(err => console.error('Erro ao verificar se o aplicativo pode ser aberto', err));
+
   return (
     <View style={styles.container}>
       <View style={styles.subConteinerChat}>
@@ -76,6 +90,22 @@ export default function Chat({ navigation }) {
         </View>
       </TouchableOpacity>
       <View style={styles.margin}></View>
+
+<View style={styles.button1}>
+<TouchableOpacity>
+<MaterialCommunityIcons
+               name="message-bulleted"
+               size={30}
+               color={"white"}
+               alignItems="center"
+               justifyContent="center"
+               onPress={() => Linking.openURL('appScheme')}>
+
+</MaterialCommunityIcons>
+</TouchableOpacity>
+</View>
+
+
     </View>
   );
 }
@@ -145,4 +175,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
+  button1: {
+    backgroundColor: "#FEB74E",
+    width: 55,
+    height: 55,
+    borderRadius: 200,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  
+  
 });

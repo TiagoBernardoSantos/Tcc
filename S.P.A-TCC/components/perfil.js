@@ -26,9 +26,7 @@ export default function Perfil({ navigation }) {
           />
           <Text style={styles.font}> Seu nome </Text>
         </View>
-<text>
-{route.params.nome}
-</text>
+
         <TextInput
           style={styles.formInput}
           keyboardType="name"

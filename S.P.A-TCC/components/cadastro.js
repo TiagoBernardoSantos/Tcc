@@ -62,7 +62,7 @@ async function cadastrar() {
       })
       .then((responseJson) => {
         if (email !== '' && senha !== '' && email !== '' && telefone !== '' && nome!== '') {
-            alert('Cadastro Concluido com Sucesso');
+            alert('Cadastro concluido com sucesso');
         navigation.navigate('Bem Vindo');
         }
       else{
