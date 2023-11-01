@@ -7,6 +7,7 @@ import Inicial from "../components/inicial";
 import Perfil from "../components/perfil";
 import Serviços from "../components/servicos";
 import Contatos from "../components/contatos";
+import Noticias from "../components/noticias";
 
 
 const Tab = createBottomTabNavigator();
@@ -41,17 +42,44 @@ function BottomTab() {
 
             />
             <Tab.Screen
+                name="Noticias"
+                component={Contatos}
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons
+                            name="phone"
+                            color={color}
+                            size={26} />
+                    ),
+                }}
+
+            />
+            <Tab.Screen
                 name="Serviços"
                 component={Serviços}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons
-                            name="menu"
+                            name="police-badge-outline"
                             color={color}
                             size={26} />
                     ),
                 }}
             />
+
+            <Tab.Screen
+                name="Notícias"
+                component={Noticias}
+                options={{
+                    tabBarIcon: ({ color }) => (
+                        <MaterialCommunityIcons
+                            name="newspaper-variant"
+                            color={color}
+                            size={26} />
+                    ),
+                }}
+            />
+
             <Tab.Screen
                 name="Perfil"
                 component={Perfil}

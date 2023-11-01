@@ -9,6 +9,7 @@ import Instrucoes from "../components/instrucoes";
 import QRcode from "../components/QRcode";
 import chat from "../components/chat";
 import Mensagem from "../components/mensagem";
+import Noticias from "../components/mensagem";
 import BottomTab from './BottomTab';
 import Inicial from '../components/inicial';
 
@@ -64,6 +65,11 @@ const StackNavigator = () => {
         <Stack.Screen
           name="inicial"
           component={Inicial}
+          options={{ title: "", headerTransparent: true, headerLeft: null }}
+        />
+        <Stack.Screen
+          name="noticias"
+          component={Noticias}
           options={{ title: "", headerTransparent: true, headerLeft: null }}
         />
          <Stack.Screen

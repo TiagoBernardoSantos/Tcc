@@ -13,12 +13,12 @@ export default function Cadastro({ navigation }) {
   const [hidePass, setHidePass] = useState(true);
 
 
-  /* passagem de parametros */
+ /* passagem de parametros 
   const FirstPage = ({ navigation }) => {
     const [nome, setNome] = useState('');
     const [sobrenome, setSobrenome] = useState('');
     const [idade, setidade] = useState('');
-  }
+  } */
 
 
 

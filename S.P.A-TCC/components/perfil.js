@@ -13,7 +13,8 @@ import {
   View,
 } from "react-native";
 
-export default function Perfil({ navigation }) {
+export default
+function Perfil({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView>

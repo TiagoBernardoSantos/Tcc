@@ -31,7 +31,7 @@ export default function Inicial({ navigation }) {
           ', \nLongitude: ' +
           position.coords.longitude
         );
-  
+
         setMarkers((prevMarkers) => [
           ...prevMarkers,
           {
@@ -48,7 +48,7 @@ export default function Inicial({ navigation }) {
       alert('Geolocalização não suportada neste dispositivo.');
     }
   };
-  
+
 
   useEffect(() => {
     // Verifique se a permissão de localização foi concedida
@@ -108,6 +108,7 @@ export default function Inicial({ navigation }) {
 
   return (
     <View style={styles.container}>
+
       <View style={{ flex: 1 }}>
         <MapView
           onPress={onClickMap}
@@ -126,26 +127,43 @@ export default function Inicial({ navigation }) {
         </MapView>
       </View>
 
-      <TouchableHighlight
-        style={{
-          height: 40,
-          width: '100%',
-          borderRadius: 10,
-          backgroundColor: 'yellow',
-          marginLeft: 0,
-          marginRight: 50,
-          marginTop: 5,
-        }}
-      >
-        <View style={styles.subContainerbutton1}>
-          <View style={styles.button1}>
-            <Button
-              title="OBTER LOCALIZAÇÃO DO USUÁRIO"
-              onPress={getCurrentLocation}
-            />
-          </View>
+
+
+
+      <View style={{
+        flexDirection: 'row',
+        backgroundColor: '#114D9D',
+      }}>
+
+        <View style={styles.alert}>
+          <TouchableHighlight
+            style={{
+              height: 55,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <MaterialCommunityIcons name="alert" size={35} />
+          </TouchableHighlight>
         </View>
-      </TouchableHighlight>
+
+        <View style={styles.margin}></View>
+
+        <View style={styles.chat}>
+          <TouchableHighlight
+            style={{
+              height: 55,
+              borderRadius: 2,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onPress={() => Linking.openURL('sms:')}
+          >
+            <MaterialCommunityIcons name="chat" size={35} />
+
+          </TouchableHighlight>
+        </View>
+      </View>
+
     </View>
   );
 }
@@ -156,12 +174,13 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: "flex-start" /* vertical */,
   },
-  subContainerbutton: {
-    alignItems: 'flex-end',
-    justifyContent: 'flex-start',
-    margin: 390,
-    marginTop: 460,
+  margin: {
+    borderColor: "black",
+    borderWidth: 1,
+
   },
   button: {
     backgroundColor: '#114D9D',
@@ -172,19 +191,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  button1: {
-    backgroundColor: '#114D9D',
-    width: 55,
+  chat: {
+    width: 210, /* horinzontal */
     height: 55,
-    borderRadius: 150,
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#114D9D',
+    borderColor: "black",
+    borderWidth: 1,
   },
 
-  subContainerbutton1: {
-    alignItems: 'flex-end',
-    justifyContent: 'flex-start',
-    margin: 350,
-    marginTop: 430,
+  alert: {
+    borderColor: "black",
+    borderWidth: 1,
+    width: '50%', /* horinzontal */
+    height: 55,
+    backgroundColor: '#114D9D',
+
   },
 });
