@@ -1,5 +1,4 @@
 import { StatusBar } from "expo-status-bar";
-import * as WebBrowser from 'expo-web-browser';
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {
   Pressable,

@@ -15,7 +15,7 @@ export default function BV({ navigation }) {
             />
 
             <TouchableOpacity style={styles.formButton}
-            onPress={() => navigation.navigate('Instruções')}>
+            onPress={() => navigation.navigate('Informativa')}>
                 <Text style={styles.txtButton} > Começar </Text>
             </TouchableOpacity>
         </View>
