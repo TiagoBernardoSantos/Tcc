@@ -13,6 +13,72 @@ import {
   View,
 } from "react-native";
 
+function Perfil() {
+  const [cd_usuario, setcd_usuario] = useState(0);
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [telefone, setTelefone] = useState('');
+
+
+  const [timeOut, setTimeOut] = useState(10000);
+  const [loading, setLoading] = useState(false);
+  const [acess, setAcess] = useState(false);
+  const [msg, setMsg] = useState('');
+  
+
+  useEffect(() => {
+    async function recuperarId() {
+        const value = await AsyncStorage_ID.getItem('IdPsicologo')
+        setId(value)
+    }
+    recuperarId()
+    getInformacoesBD()
+}, [id]);
+
+async function getInformacoesBD() {
+  setLoading(true);
+  var url = 'https://libellatcc.000webhostapp.com/getInformacoes/getInformacoesBD.php';
+  var wasServerTimeout = false;
+  var timeout = setTimeout(() => {
+      wasServerTimeout = true;
+      alert('Tempo de espera para busca de informações excedido');
+  }, timeOut);
+  const resposta = fetch(url, {
+    method: 'POST', //tipo de requisição
+    body: JSON.stringify({ IdPsicologo: id }),
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+.then((response) => {
+  timeout && clearTimeout(timeout);
+  if (!wasServerTimeout) {
+      return response.json();
+  }
+})
+.then((responseJson) => {
+  // Recolhendo as informações do banco de dados e salvando nas váriaveis
+    setcd_usuario(responseJson.informacoes[0].cd_usuario);
+    setEmail(responseJson.informacoes[0].email);
+    setNome(responseJson.informacoes[0].nome);
+    setTelefone(responseJson.informacoes[0].telefone);
+    setSenha(responseJson.informacoes[0].senha);
+            
+})
+//se ocorrer erro na requisição ou conversão
+.catch((error) => {
+  timeout && clearTimeout(timeout);
+  if (!wasServerTimeout) {
+      Alert.alert("Alerta!", "Tempo de espera do servidor excedido!");
+  }
+
+});
+setLoading(false);
+}
+}
+
+
 export default
 function Perfil({ navigation }) {
   return (
