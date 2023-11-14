@@ -106,6 +106,14 @@ export default function Inicial({ navigation }) {
     ]);
   };
 
+  const phoneNumber = '1238229687';
+  const message = `SOCORRO! Estou em uma situação de emergência! Aqui está a minha Localização: Latitude ${region.latitude}, Longitude ${region.longitude}`;
+
+  const openSMS = () => {
+    const smsUrl = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+    Linking.openURL(smsUrl);
+  };
+
   return (
     <View style={styles.container}>
 
@@ -156,7 +164,7 @@ export default function Inicial({ navigation }) {
               alignItems: 'center',
               justifyContent: 'center',
             }}
-            onPress={() => Linking.openURL('sms:')}
+            onPress={openSMS}
           >
             <MaterialCommunityIcons name="chat" size={35} />
 

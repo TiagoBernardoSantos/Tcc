@@ -17,9 +17,13 @@ export default function Serviços({ navigation }) {
   
   const makePhoneCallBomb = () => {
     if (Platform.OS === "android") {
-      Linking.openURL("tel: 193")
+      Linking.openURL("tel:193")
     }
-    else{
+    else if 
+      (Platform.OS === "ios"){
+      Linking.openURL("telpromt:193")
+    }
+    else {
       Linking.openURL("telpromt:193")
     }
   }
@@ -28,7 +32,11 @@ export default function Serviços({ navigation }) {
     if (Platform.OS === "android") {
       Linking.openURL("tel:192")
     }
-    else{
+    else if 
+      (Platform.OS === "ios"){
+      Linking.openURL("telpromt:192")
+    }
+    else {
       Linking.openURL("telpromt:192")
     }
   }
@@ -36,7 +44,11 @@ export default function Serviços({ navigation }) {
     if (Platform.OS === "android") {
       Linking.openURL("tel:188")
     }
-    else{
+    else if 
+      (Platform.OS === "ios"){
+      Linking.openURL("telpromt:188")
+    }
+    else {
       Linking.openURL("telpromt:188")
     }
   }
@@ -45,11 +57,14 @@ export default function Serviços({ navigation }) {
     if (Platform.OS === "android") {
       Linking.openURL("tel:190")
     }
-    else{
+    else if 
+      (Platform.OS === "ios"){
       Linking.openURL("telpromt:190")
     }
-  }
-  
+    else {
+      Linking.openURL("telpromt:190")
+    }
+    }
   
   
   return (

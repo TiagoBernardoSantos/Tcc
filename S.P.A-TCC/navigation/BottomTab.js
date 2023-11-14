@@ -41,19 +41,7 @@ function BottomTab() {
                 }}
 
             />
-            <Tab.Screen
-                name="Noticias"
-                component={Contatos}
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons
-                            name="phone"
-                            color={color}
-                            size={26} />
-                    ),
-                }}
-
-            />
+         
             <Tab.Screen
                 name="Serviços"
                 component={Serviços}

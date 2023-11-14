@@ -20,7 +20,7 @@ import AsyncStorage_ID from "@react-native-async-storage/async-storage"; // inst
 /* termos e condições */
 export default function Perfil({ navigation }) {
   function termos() {
-    Alert.alert("Termos e Políticas de Segurança"," \n 1. Política de Acesso e Controle de Identidade: Apenas usuários autorizados devem ter acesso aos sistemas e dados, com revisões regulares. \n2. Política de Senhas: Usuários devem criar senhas fortes, trocá-las regularmente e ativar autenticação de dois fatores.\n 3. Política de Segurança de Redes: Implementar medidas como firewalls, detecção de intrusão e criptografia, além de manter o software atualizado. \n 4. Política de Gerenciamento de Dispositivos: Proteger todos os dispositivos com senhas ou autenticação biométrica e manter um inventário atualizado. \n 5. Política de Conscientização e Treinamento: Fornecer treinamento regular sobre segurança, incluindo reconhecimento de phishing e proteção de informações confidenciais.\n 6. Política de Backup e Recuperação de Dados: Realizar backups regulares e testar procedimentos de recuperação de dados. \n 7. Política de Uso Aceitável: Definir regras claras sobre o uso de recursos da organização, como internet e e-mail.");
+    alert("termos e politicas de segurança ");
   }
 
   const [cd_usuario, setCdUsuario] = useState(0);
@@ -34,13 +34,9 @@ export default function Perfil({ navigation }) {
   const [acess, setAcess] = useState(false);
   const [msg, setMsg] = useState("");
 
-
- 
-
-
   useEffect(() => {
     async function recuperarId() {
-      const value = await AsyncStorage_ID.getItem("UsuariosInfo");
+      const value = await AsyncStorage_ID.getItem('UsuariosInfo');
       setCdUsuario(value);
     }
     recuperarId();
@@ -85,82 +81,37 @@ export default function Perfil({ navigation }) {
     setLoading(false);
   }
 
-  async function excluir() {
-    if (cd_usuario > 0) {
-      setLoading(true);
-  
-      var url = 'https://tccspa.000webhostapp.com/excluir.php';
-  
-      var wasServerTimeout = false;
-      var timeout = setTimeout(() => {
-        wasServerTimeout = true;
-        alert('Tempo de espera para busca de informações excedido');
-      }, timeOut);
-  
-      const resposta = await fetch(url, {
-        method: 'POST', //tipo de requisição
-        body: JSON.stringify({
-          cd_usuario: cd_usuario,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-        .then((response) => {
-          timeout && clearTimeout(timeout); 
-          if (!wasServerTimeout) {
-            return response.json();
-          }
-        })
-        .then((responseJson) => {
-          // limpa o formulário
-          setCdUsuario(0);
-          setNome('');
-          setEmail('');
-          setSenha('');
-          setTelefone('');
-
-          alert(JSON.stringify(responseJson.informacoes[0].msg));
-          navigation.navigate("Cadastro");
-
-        })
-        //se ocorrer erro na requisição ou conversãok
-        .catch((error) => {
-          timeout && clearTimeout(timeout);
-          if (!wasServerTimeout) {
-            //Error logic here
-          }
-  
-          //  alert('erro'+error) 
-        });
-  
-      setLoading(false);
-    } else alert('Realizar consulta');
-    /* alert("teste som");*/
-  }
-
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.subContainer}>
           <MaterialCommunityIcons
-            name="account-circle"
+            name="account-plus"
             size={70}
             alignItems="center"
             justifyContent="center"
           />
-          <Text style={styles.font}>{nome}</Text>
+          <Text style={styles.font}>Nome</Text>
         </View>
 
-        <View style={styles.formInput}>
-          <Text style={styles.subTxtButton}>{nome}</Text>
-        </View>
+        <TextInput
+          style={styles.formInput}
+          // keyboardType="name"
+          autoCapitalize="none"
+          placeholder="Nome"
+          value={nome}
+        />
 
         {/* passagem de informações */}
-        <View style={styles.formInput}>
-          <Text style={styles.subTxtButton}>{email}</Text>
-        </View>
-        {/*
+        <TextInput
+          style={styles.formInput}
+          // keyboardType="email-address"
+          autoCapitalize="none"
+          autoComplete="email"
+          placeholder="Email"
+          value={email}
+        />
+
         <TextInput
           style={styles.formInput}
           secureTextEntry
@@ -169,25 +120,25 @@ export default function Perfil({ navigation }) {
           autoComplete="password"
           value={senha}
         />
-        */}
-        <View style={styles.formInput}>
-          <Text style={styles.subTxtButton}>{senha}</Text>
-        </View>
 
-        <View style={styles.formInput}>
-          <Text style={styles.subTxtButton}>{telefone}</Text>
-        </View>
+        <TextInput
+          style={styles.formInput}
+          // keyboardType="phone-pad"
+          autoCapitalize="none"
+          autoComplete="tel"
+          placeholder="Telefone"
+          value={telefone}
+        />
 
+        <TextInput
+          style={styles.formInput}
+          autoCapitalize="none"
+          placeholder="Notificação"
+        />
         <Pressable style={styles.formInput}>
           <Text style={styles.subTxtButton} onPress={() => termos()}>
-            <MaterialCommunityIcons name="police-badge" size={20}   />
+            <MaterialCommunityIcons name="police-badge" size={20} />
             Termos e Condições
-          </Text>
-        </Pressable>
-        <Pressable style={styles.formInput}>
-          <Text style={styles.subTxtButton} onPress={() => termos()}>
-            <MaterialCommunityIcons name="account-group-outline" size={25}   />
-            Sobre
           </Text>
         </Pressable>
 
@@ -195,9 +146,7 @@ export default function Perfil({ navigation }) {
           <Pressable style={styles.subButton}>
             <Text
               style={styles.subTxtButton}
-              /*onPress={() => navigation.navigate("Cadastro")}*/
-
-              onPress={() => excluir()}
+              onPress={() => navigation.navigate("Cadastro")}
             >
               <MaterialCommunityIcons name="account-remove" size={20} /> Apagar
               Perfil{" "}
@@ -231,7 +180,6 @@ const styles = StyleSheet.create({
     width: "90%",
     padding: 10,
     margin: 10,
-   
   },
 
   subButton: {
@@ -239,10 +187,9 @@ const styles = StyleSheet.create({
   },
   subTxtButton: {
     color: "#424242",
-    fontSize: 20,
+    fontSize: 17,
     alignItems: "center",
-    paddingLeft:7,
-   },
+  },
 
   font: {
     color: "white",
