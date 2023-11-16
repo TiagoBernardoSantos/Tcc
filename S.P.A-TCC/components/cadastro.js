@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text, TextInput, TouchableOpacity, View, Alert
 } from 'react-native';
+import AsyncStorage_ID from "@react-native-async-storage/async-storage"; // instalar
 
 
 export default function Cadastro({ navigation }) {
@@ -13,16 +14,16 @@ export default function Cadastro({ navigation }) {
   const [hidePass, setHidePass] = useState(true);
 
 
- /* passagem de parametros 
-  const FirstPage = ({ navigation }) => {
-    const [nome, setNome] = useState('');
-    const [sobrenome, setSobrenome] = useState('');
-    const [idade, setidade] = useState('');
-  } */
+  /* passagem de parametros 
+   const FirstPage = ({ navigation }) => {
+     const [nome, setNome] = useState('');
+     const [sobrenome, setSobrenome] = useState('');
+     const [idade, setidade] = useState('');
+   } */
 
 
 
-/* BANCO DE DADOS */
+  /* BANCO DE DADOS */
   const [cd_usuario, setcd_usuario] = useState(0);
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
@@ -36,8 +37,11 @@ export default function Cadastro({ navigation }) {
   const [acess, setAcess] = useState(false);
   const [msg, setMsg] = useState('');
 
-  
-async function cadastrar() {
+  const SalvarIdUsuario = (key, value) => {
+    AsyncStorage_ID.setItem(key, value);
+  };
+
+  async function cadastrar() {
     setLoading(true);
     var url = 'https://tccspa.000webhostapp.com/cadastro.php';
 
@@ -61,32 +65,71 @@ async function cadastrar() {
         }
       })
       .then((responseJson) => {
-        
+        /* /* se houver informações */
+        if (email !== '' && senha !== '' && email !== '' && telefone !== '' && nome !== '') {
+          if (responseJson.informacoes[0].cd_usuario == 0) {
+            alert("Informação não econtrada!");
+            setCdUsuario(0);
+          } else {
+            var url = "https://tccspa.000webhostapp.com/informacoes.php";
+            var wasServerTimeout = false;
+            var timeout = setTimeout(() => {
+              wasServerTimeout = true;
+              alert("Tempo de espera para busca de informações excedido");
+            }, timeOut);
+            alert('Cadastro Concluido com Sucesso');
+            navigation.navigate('Bem Vindo');
+            const resposta = fetch(url, {
+              method: "POST", //tipo de requisição
+              body: JSON.stringify({ email: email, senha: senha }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
 
-        if (email !== '' && senha !== '' && email !== '' && telefone !== '' && nome!== '') {
-          Alert.alert("Alerta!", "Tempo de espera do servidor excedido!");
-        navigation.navigate('Bem Vindo');
+              .then((response) => {
+                timeout && clearTimeout(timeout);
+                if (!wasServerTimeout) {
+                  return response.json();
+                }
+              })
+
+              .then((responseJson) => {
+                /* se houver informações */
+                var UsuarioInfos = (responseJson.usuarios[0].cd_usuario);
+                SalvarIdUsuario('UsuariosInfo', UsuarioInfos);
+                setCdUsuario(UsuarioInfos);
+
+              })
+
+              //se ocorrer erro na requisição ou conversão
+              .catch((error) => {
+                timeout && clearTimeout(timeout);
+                if (!wasServerTimeout) {
+                  //Error logic here
+                }
+
+                //  alert('erro'+error)
+              });
+          }
+        } else {
+          alert("Informações não inseridas!");
         }
-      else{
-        alert('Informações não inseridas!');
-
-      }
-
       })
-      //se ocorrer erro na requisição ou conversão
+      //se ocorrer erro na requisição ou conversão */
       .catch((error) => {
         timeout && clearTimeout(timeout);
         if (!wasServerTimeout) {
           //Error logic here
         }
 
-        alert('erro'+error)
+        alert('erro' + error)
       });
 
     setLoading(false);
   }
 
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.txtTitle}> Inscrever-se </Text>
@@ -100,9 +143,9 @@ async function cadastrar() {
         autoCapitalize="none"
         placeholder='Digite seu e-mail...'
         autoComplete="email"
-        onChangeText={(texto)=>setEmail(texto)}
-        value  = {email}
-        
+        onChangeText={(texto) => setEmail(texto)}
+        value={email}
+
       />
       <Text style={styles.txtSubTitle}>
         Senha:
@@ -114,8 +157,8 @@ async function cadastrar() {
           secureTextEntry={hidePass}
           placeholder='Digite sua senha...'
           maxLength={20}
-          onChangeText={(texto)=>setSenha(texto)}
-          value = {senha}
+          onChangeText={(texto) => setSenha(texto)}
+          value={senha}
         />
 
 
@@ -139,8 +182,8 @@ async function cadastrar() {
         autoCapitalize="none"
         placeholder='Digite seu nome completo...'
         autoComplete="name"
-        onChangeText={(texto)=>setNome(texto)}
-        value  = {nome}
+        onChangeText={(texto) => setNome(texto)}
+        value={nome}
 
       />
 
@@ -154,15 +197,15 @@ async function cadastrar() {
         dataDetectorTypes="phoneNumber"
         keyboardType="numeric"
         maxLength={16}
-        onChangeText={(texto)=>setTelefone(texto)}
-        value  = {telefone}
+        onChangeText={(texto) => setTelefone(texto)}
+        value={telefone}
 
       />
 
       <TouchableOpacity style={styles.formButton}
         onPress={() => cadastrar()}
-       
-        >
+
+      >
         <Text style={styles.txtButton}> Entrar </Text>
       </TouchableOpacity>
 
