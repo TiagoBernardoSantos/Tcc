@@ -1,7 +1,4 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from 'react';
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   StyleSheet,
   Text,
@@ -9,201 +6,213 @@ import {
   TouchableOpacity,
   FlatList,
   TextInput,
-  ActivityIndicator,
-} from "react-native";
+} from 'react-native';
 import * as Contacts from 'expo-contacts';
 
 export default function Contatos({ navigation }) {
-  // state para contatos
   const [contatos, setContatos] = useState([]);
-  const [contatosAdd, setContatosAdd] = useState([]);
-  const [inMemoryContacts, setinMemoryContacts] = useState([]);
+  const [contatosFavoritos, setContatosFavoritos] = useState([]);
+  const [inMemoryContacts, setInMemoryContacts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searching, setSearching] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     (async () => {
-      // pede permissão de acesso
       const { status } = await Contacts.requestPermissionsAsync();
-      // verifica permissão, se é permitido
-      if (status === "granted") {
-        //indicar que está processando
+      if (status === 'granted') {
         setLoading(true);
-        // obtem os contatos
         const { data } = await Contacts.getContactsAsync({
-          //fields: [Contacts.Fields.Emails],
           fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
         });
 
-        setContatos(data);
-        setinMemoryContacts(data);
+        const contactsWithFavorites = data.map((contact) => ({
+          ...contact,
+          isFavorite: false,
+        }));
+
+        setContatos(contactsWithFavorites);
+        setInMemoryContacts(contactsWithFavorites);
       }
     })();
   }, []);
 
-  searchContacts = (value) => {
-    setSearching(true)
+  const searchContacts = (value) => {
+    setSearchTerm(value);
+    setSearching(true);
     const filteredContacts = inMemoryContacts.filter((contact) => {
-      let contactLowercase = (
-        contact.firstName +
-        " " +
-        contact.lastName
-      ).toLowerCase();
-
-      let searchTermLowercase = value.toLowerCase();
-
+      const contactLowercase = `${contact.firstName} ${contact.lastName}`.toLowerCase();
+      const searchTermLowercase = value.toLowerCase();
       return contactLowercase.indexOf(searchTermLowercase) > -1;
     });
     setContatos(filteredContacts);
+    updateFavoritesList(filteredContacts);
+  };
 
-   
+  const toggleFavorite = (contactId) => {
+    const updatedContacts = contatos.map((contact) => {
+      if (contact.id === contactId) {
+        contact.isFavorite = !contact.isFavorite;
+      }
+      return contact;
+    });
+
+    setContatos(updatedContacts);
+    updateFavoritesList(updatedContacts);
+  };
+
+  const updateFavoritesList = (contactsList) => {
+    const favorites = contactsList.filter((contact) => contact.isFavorite);
+    setContatosFavoritos(favorites);
   };
 
   const clickItemFlatList = (item) => {
-    setContatosAdd(item);
-    console.log(contatosAdd)
+    toggleFavorite(item.id);
+  };
+
+  const clearSearch = () => {
+    setSearchTerm('');
+    setSearching(false);
+    setContatos(inMemoryContacts);
+    updateFavoritesList(inMemoryContacts);
   };
 
   return (
-      <View style={styles.container}>
-        <TextInput
-          placeholder="Search"
-          placeholderTextColor="#dddddd"
-          style={{
-            backgroundColor: "#2f363c",
-            height: 50,
-            fontSize: 25,
-            padding: 10,
-            color: "white",
-            borderBottomWidth: 0.5,
-            borderBottomColor: "#7d90a0",
-            
-          }}
-          onChangeText={(value) => searchContacts(value)}
+    <View style={styles.container}>
+      <TextInput
+        placeholder="Search"
+        placeholderTextColor="#dddddd"
+        style={{
+          backgroundColor: '#2f363c',
+          height: 50,
+          fontSize: 25,
+          padding: 10,
+          color: 'white',
+          borderBottomWidth: 0.5,
+          borderBottomColor: '#7d90a0',
+        }}
+        value={searchTerm}
+        onChangeText={(value) => searchContacts(value)}
+      />
+      <View style={styles.contactsContainer}>
+        <Text style={styles.headerText}>Favorites</Text>
+        <FlatList
+          data={contatosFavoritos}
+          renderItem={({ item }) => (
+            <View style={{ minHeight: 70, padding: 5 }}>
+              <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 26 }}>
+                {item.firstName} {item.lastName}
+              </Text>
+              <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                {item.phoneNumbers[0]?.number || 'No phone number'}
+              </Text>
+              <TouchableOpacity onPress={() => clickItemFlatList(item)}>
+                <Text>{item.isFavorite ? 'Unfavorite' : 'Favorite'}</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          keyExtractor={(item) => item.id.toString()}
+          ListEmptyComponent={() => (
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 50,
+              }}
+            ></View>
+          )}
         />
+      </View>
+      <View style={styles.contactsContainer}>
+        <Text style={styles.headerText}>Seus Contatos</Text>
         {searching ? (
           <FlatList
             data={contatos}
             renderItem={({ item }) => (
               <View style={{ minHeight: 70, padding: 5 }}>
-                <Text
-                  style={{ color: "black", fontWeight: "bold", fontSize: 26 }}
-                >
-                  {item.firstName + " "}
-                  {item.lastName}
+                <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 26 }}>
+                  {item.firstName} {item.lastName}
                 </Text>
-                <Text style={{ color: "black", fontWeight: "bold" }}>
-                  {item.phoneNumbers[0].number}
+                <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                  {item.phoneNumbers[0]?.number || 'No phone number'}
                 </Text>
                 <TouchableOpacity onPress={() => clickItemFlatList(item)}>
-                  <Text>Adicionarar</Text>
+                  <Text>{item.isFavorite ? 'Unfavorite' : 'Favorite'}</Text>
                 </TouchableOpacity>
               </View>
             )}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item) => item.id.toString()}
             ListEmptyComponent={() => (
               <View
                 style={{
                   flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   marginTop: 50,
                 }}
               >
-                <Text style={{ color: "#bad555" }}>No Contacts Found</Text>
+                <Text style={{ color: '#010101'}}>Nenhum contato foi encontrado</Text>
               </View>
             )}
           />
         ) : (
-          <View>
-            <FlatList
-            data={contatosAdd}
+          <FlatList
+            data={contatos}
             renderItem={({ item }) => (
               <View style={{ minHeight: 70, padding: 5 }}>
-                <Text
-                  style={{ color: "black", fontWeight: "bold", fontSize: 26 }}
-                >
-                  {item.firstName + " "}
-                  {item.lastName}
+                <Text style={{ color: 'black', fontWeight: 'bold', fontSize: 26 }}>
+                  {item.firstName} {item.lastName}
                 </Text>
-                <Text style={{ color: "black", fontWeight: "bold" }}>
-                  {item.phoneNumbers[0].number}
+                <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                  {item.phoneNumbers[0]?.number || 'No phone number'}
                 </Text>
+                <TouchableOpacity onPress={() => clickItemFlatList(item)}>
+                  <Text>{item.isFavorite ? 'Unfavorite' : 'Favorite'}</Text>
+                </TouchableOpacity>
               </View>
             )}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item) => item.id.toString()}
             ListEmptyComponent={() => (
               <View
                 style={{
                   flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   marginTop: 50,
                 }}
-              >
-              </View>
+              ></View>
             )}
           />
-          </View>
         )}
       </View>
+      
+      <TouchableOpacity style={styles.clearButton} onPress={clearSearch}>
+        <Text style={{ color: 'white' }}>Clear Search</Text>
+      </TouchableOpacity>
+    </View>
   );
-};
-/* roda pé: https://www.youtube.com/watch?v=AnjyzruZ36E */
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: "100%",
-    gap: 2,
-    backgroundColor: "#fff",
-    gap: 40,
+    backgroundColor: '#fff',
     paddingHorizontal: 20,
     marginTop: 30,
   },
-  subContainer: {
-    /*flexDirection: 'column',   */
-    width: "100%" /* horinzontal */,
-    height: 150 /* vertical */,
-    flexDirection: "row",
-    backgroundColor: "#fff",
-
+  contactsContainer: {
+    marginBottom: 20,
   },
-  margin: {
-    borderColor: "black",
-    borderWidth: 1,
-    width: "100%" /* horinzontal */,
-    
+  headerText: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
-  img: {
-    /*flexDirection: 'column',   */
-  },
-
-  font: {
-    color: "black",
-    fontSize: 35,
-    marginTop: 20,
-  },
-  txtnome: {
-    flexDirection: "row",
-    display: "flex",
-    fontSize: 30,
-  },
-  txtnumero: {
-    flexDirection: "row",
-    display: "flex",
-    fontSize: 20,
-  },
-  subContainerbutton: {
-    alignItems: "flex-end",
-    justifyContent: "flex-start",
-    margin: 30,
-  },
-  button: {
-    backgroundColor: "#114D9D",
-    width: 55,
-    height: 55,
-    borderRadius: 150,
-    alignItems: "center",
-    justifyContent: "center",
+  clearButton: {
+    backgroundColor: '#2f363c',
+    padding: 10,
+    alignItems: 'center',
+    marginTop: 10,
   },
 });

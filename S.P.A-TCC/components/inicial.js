@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { View, TouchableHighlight, StyleSheet, Button, Linking } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, TouchableHighlight, StyleSheet, Linking } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import * as Location from 'expo-location'; // Importando o módulo de localização correto
+import * as Location from 'expo-location';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { RNCamera } from 'react-native-camera';
 
 export default function Inicial({ navigation }) {
   const [region, setRegion] = useState({
@@ -11,6 +12,10 @@ export default function Inicial({ navigation }) {
     latitudeDelta: 0.5,
     longitudeDelta: 0.5,
   });
+
+  const [photoUri, setPhotoUri] = useState(null);
+  const cameraRef = useRef(null);
+
   const [markers, setMarkers] = useState([
     {
       coordinate: {
@@ -22,6 +27,12 @@ export default function Inicial({ navigation }) {
         'Av. Salmão, 570 - Parque Res. Aquarius, São José dos Campos - SP, 12246-260',
     },
   ]);
+
+  const [favoriteContacts, setFavoriteContacts] = useState([
+    { name: 'Nome do Favorito', phoneNumber: '123456789' },
+    // Adicione mais contatos favoritos conforme necessário
+  ]);
+
   const getCurrentLocation = () => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -49,6 +60,11 @@ export default function Inicial({ navigation }) {
     }
   };
 
+  const openSMS = (phoneNumber) => {
+    // Função para enviar SMS ao número de telefone especificado
+    const smsUrl = `sms:${phoneNumber}`;
+    Linking.openURL(smsUrl);
+  };
 
   useEffect(() => {
     // Verifique se a permissão de localização foi concedida
@@ -82,7 +98,7 @@ export default function Inicial({ navigation }) {
         ]);
       });
     });
-  }, []); // Este efeito será executado uma vez ao carregar o componente
+  }, []);
 
   const onClickMap = (coordenadas) => {
     alert('Coordenadas:' + JSON.stringify(coordenadas.nativeEvent.coordinate));
@@ -106,72 +122,92 @@ export default function Inicial({ navigation }) {
     ]);
   };
 
-  const phoneNumber = '1238229687';
-  const message = `SOCORRO! Estou em uma situação de emergência! Aqui está a minha Localização: Latitude ${region.latitude}, Longitude ${region.longitude}`;
+  const takePicture = async () => {
+    if (cameraRef.current) {
+      const options = { quality: 0.5, base64: true };
+      const data = await cameraRef.current.takePictureAsync(options);
+      setPhotoUri(data.uri);
+    }
+  };
 
-  const openSMS = () => {
+  const openSMSWithMessage = () => {
+    const message = `SOCORRO! Estou em uma situação de emergência! Aqui está a minha Localização: Latitude ${region.latitude}, Longitude ${region.longitude}`;
     const smsUrl = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
     Linking.openURL(smsUrl);
   };
 
+  const openSMSWithPhoto = () => {
+    if (photoUri) {
+      if (favoriteContacts.length > 0) {
+        // Itera sobre todos os contatos favoritos e envia a mensagem com a foto
+        favoriteContacts.forEach((contact) => {
+          const phoneNumber = contact.phoneNumber;
+          openSMS(phoneNumber);
+        });
+      } else {
+        alert('Nenhum contato favorito disponível.');
+      }
+    } else {
+      openSMSWithMessage();
+    }
+  };
+  
+  
+
   return (
     <View style={styles.container}>
+      {/* Mapa e outros componentes do mapa */}
+      <MapView
+        onPress={onClickMap}
+        style={styles.map}
+        initialRegion={region}
+        ref={(map) => (this.map = map)}
+      >
+        {markers.map((marker, index) => (
+          <Marker
+            key={index}
+            coordinate={marker.coordinate}
+            title={marker.title}
+            description={marker.description}
+          />
+        ))}
+      </MapView>
 
-      <View style={{ flex: 1 }}>
-        <MapView
-          onPress={onClickMap}
-          style={styles.map}
-          initialRegion={region}
-          ref={(map) => (this.map = map)}
+      {/* Barra de Ações na Parte Inferior */}
+      <View style={styles.bottomBar}>
+        <TouchableHighlight
+          style={styles.alert}
+          onPress={() => {
+            takePicture();
+            openSMSWithPhoto();
+          }}
         >
-          {markers.map((marker, index) => (
-            <Marker
-              key={index}
-              coordinate={marker.coordinate}
-              title={marker.title}
-              description={marker.description}
-            />
-          ))}
-        </MapView>
-      </View>
-
-
-
-
-      <View style={{
-        flexDirection: 'row',
-        backgroundColor: '#114D9D',
-      }}>
-
-        <View style={styles.alert}>
-          <TouchableHighlight
-            style={{
-              height: 55,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <MaterialCommunityIcons name="alert" size={35} />
-          </TouchableHighlight>
-        </View>
+          <MaterialCommunityIcons name="alert" size={35} />
+        </TouchableHighlight>
 
         <View style={styles.margin}></View>
 
-        <View style={styles.chat}>
-          <TouchableHighlight
-            style={{
-              height: 55,
-              borderRadius: 2,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-            onPress={openSMS}
-          >
-            <MaterialCommunityIcons name="chat" size={35} />
-
-          </TouchableHighlight>
-        </View>
+        <TouchableHighlight
+          style={styles.chat}
+          onPress={() => {
+            if (favoriteContacts.length > 0) {
+              openSMS(favoriteContacts[0].phoneNumber);
+            } else {
+              alert('Nenhum contato favorito disponível.');
+            }
+          }}
+        >
+          <MaterialCommunityIcons name="chat" size={35} />
+        </TouchableHighlight>
       </View>
 
+      {/* Componente da câmera */}
+      <RNCamera
+        ref={cameraRef}
+        style={styles.camera}
+        type={RNCamera.Constants.Type.back}
+        flashMode={RNCamera.Constants.FlashMode.off}
+      />
     </View>
   );
 }
@@ -183,36 +219,35 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    justifyContent: "flex-start" /* vertical */,
+    justifyContent: 'flex-start',
   },
   margin: {
-    borderColor: "black",
+    borderColor: 'black',
     borderWidth: 1,
-
   },
-  button: {
+  bottomBar: {
+    flexDirection: 'row',
     backgroundColor: '#114D9D',
-    width: 55,
+  },
+  alert: {
+    borderColor: 'black',
+    borderWidth: 1,
+    width: '50%',
     height: 55,
-    borderRadius: 150,
+    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   chat: {
-    width: 210, /* horinzontal */
+    width: '50%',
     height: 55,
     backgroundColor: '#114D9D',
-    borderColor: "black",
+    borderColor: 'black',
     borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-
-  alert: {
-    borderColor: "black",
-    borderWidth: 1,
-    width: '50%', /* horinzontal */
-    height: 55,
-    backgroundColor: '#114D9D',
-
+  camera: {
+    flex: 1,
   },
 });
