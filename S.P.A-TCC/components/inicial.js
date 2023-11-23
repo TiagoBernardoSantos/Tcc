@@ -130,27 +130,35 @@ export default function Inicial({ navigation }) {
     }
   };
 
-  const openSMSWithMessage = () => {
-    const message = `SOCORRO! Estou em uma situação de emergência! Aqui está a minha Localização: Latitude ${region.latitude}, Longitude ${region.longitude}`;
-    const smsUrl = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+  const JustOpenSMS = () => {
+    const smsUrl = `sms:${favoriteContacts[0].phoneNumber}`;
     Linking.openURL(smsUrl);
   };
 
-  const openSMSWithPhoto = () => {
-    if (photoUri) {
-      if (favoriteContacts.length > 0) {
-        // Itera sobre todos os contatos favoritos e envia a mensagem com a foto
-        favoriteContacts.forEach((contact) => {
-          const phoneNumber = contact.phoneNumber;
-          openSMS(phoneNumber);
-        });
-      } else {
-        alert('Nenhum contato favorito disponível.');
-      }
+const openSMSWithMessage = () => {
+  const message = `SOCORRO! Estou em uma situação de emergência! Aqui está a minha Localização: Latitude ${region.latitude}, Longitude ${region.longitude}`;
+  if (favoriteContacts.length > 0) {
+    const phoneNumber = favoriteContacts[0].phoneNumber;
+    const smsUrl = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+    Linking.openURL(smsUrl);
+  } else {
+    alert('Nenhum contato favorito disponível.');
+  }
+};
+
+const openSMSWithPhoto = () => {
+  if (photoUri) {
+    if (favoriteContacts.length > 0) {
+      const phoneNumber = favoriteContacts[0].phoneNumber;
+      openSMS(phoneNumber);
     } else {
-      openSMSWithMessage();
+      alert('Nenhum contato favorito disponível.');
     }
-  };
+  } else {
+    openSMSWithMessage();
+  }
+};
+
   
   
 
@@ -190,11 +198,7 @@ export default function Inicial({ navigation }) {
         <TouchableHighlight
           style={styles.chat}
           onPress={() => {
-            if (favoriteContacts.length > 0) {
-              openSMS(favoriteContacts[0].phoneNumber);
-            } else {
-              alert('Nenhum contato favorito disponível.');
-            }
+              JustOpenSMS();
           }}
         >
           <MaterialCommunityIcons name="chat" size={35} />
@@ -221,29 +225,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'flex-start',
   },
-  margin: {
-    borderColor: 'black',
-    borderWidth: 1,
-  },
   bottomBar: {
-    flexDirection: 'row',
-    backgroundColor: '#114D9D',
+    position: 'absolute',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    bottom: 20,
+    right: 20,
   },
   alert: {
-    borderColor: 'black',
-    borderWidth: 1,
-    width: '50%',
-    height: 55,
+    width: 65,
+    height: 65,
     backgroundColor: 'red',
+    borderRadius: 65 / 2,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 6,
   },
   chat: {
-    width: '50%',
-    height: 55,
+    width: 65,
+    height: 65,
     backgroundColor: '#114D9D',
-    borderColor: 'black',
-    borderWidth: 1,
+    borderRadius: 65 / 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
